@@ -1,0 +1,94 @@
+.login-container{
+  display: flex;
+  justify-content: center;
+  background: var(--primary-bg);
+  padding-top: 32px;
+  height: 100vh;
+}
+
+
+.login-poster{
+  width: 385px;
+  height: 530px;
+  margin-right: 32px;
+}
+.login-poster-image{
+  width: 100%;
+  height: 100%;
+}
+.login-wrapper{
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+  
+}
+.login-box{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+.logo-wrapper{
+  margin: 36px 0 12px 0;
+}
+.instagram-logo{
+  height: 50px;
+  width: 174px;
+}
+
+
+.login-form-wrapper{
+  padding: 0 40px 20px ;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  
+}
+
+.input-label{
+  margin: 0 40px 6px;
+  width: 100%;
+}
+
+.login-form input {
+  padding: 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  outline: none;
+  border-radius: 3px;
+  width: 100%;
+}
+.button-wrapper{
+  width: 100%;
+  margin: 8px 40px;
+}
+.login-button{
+  width: 100%;
+  background-color: var(--primary-btn-bg);
+  border: none;
+  border-radius: 4px;
+  padding: 7px 15px ;
+  color: white;
+  font-weight: bold;
+}
+
+.redirect-text{
+  margin: 15px;
+}
+.redirect-text a{
+  color: var(--primary-btn-bg);
+  text-decoration: none;
+  font-weight: 500;
+}
