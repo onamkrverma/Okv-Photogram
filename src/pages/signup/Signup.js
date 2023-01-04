@@ -5,6 +5,8 @@ import firebaseContex from '../../context/FirebaseContex'
 import { db } from '../../config/FirebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 import usernameChecker from './UsernameCheker'
+import { updateProfile } from 'firebase/auth'
+import { auth } from '../../config/FirebaseConfig'
 
 
 const Signup = () => {
@@ -25,11 +27,13 @@ const Signup = () => {
     if (!usernameList.length) {
       try {
         const createUser = await signup(email, password);
+
         // add userinfo to firebase database
-        const userRef = doc(db, 'userinfo', createUser.user.uid)
-        await createUser.user.updateProfile({
+        await updateProfile(auth.currentUser,{
           displayName: username
-        })
+        });
+        const userRef = doc(db, 'userinfo', createUser.user.uid)
+        
         await setDoc(userRef,
           {
             userId: createUser.user.uid,
@@ -43,12 +47,21 @@ const Signup = () => {
         navigate('/')
 
       } catch (error) {
+        console.log(error)
         e.target.reset();
         setErrorMessage(error.message.replace('Firebase:',''));
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 5000);
+        
       }
     }
     else {
       setErrorMessage("Username already taken")
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+      
     }
 
 

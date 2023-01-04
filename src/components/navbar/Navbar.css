@@ -1,0 +1,39 @@
+.navbar-container{
+  padding: 12px;
+  width: 245px;
+  height: 100vh;
+  border: 1px solid var(--border-color);
+  background-color: var(--secondary-bg);
+}
+
+.navbar-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+.navbar-wrapper .instagram-logo{
+  width: 130px;
+  height: 45px;
+}
+
+.menu-wrapper{
+  display: flex;
+  align-items: center;
+  padding: 12px ;
+  margin: 4px 0;
+}
+
+.icon{
+  width: 30px;
+  height: 30px;
+}
+
+.menu-title{
+  padding-left: 16px;
+  color: var(--primary-text);
+}
+
+.menu-title a{
+  text-decoration: none;
+  color: var(--primary-text);
+  
+}

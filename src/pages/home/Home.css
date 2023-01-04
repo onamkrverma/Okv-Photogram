@@ -1,0 +1,10 @@
+.home-page-container{
+  display:flex;
+  
+}
+.story-post-wrapper{
+  max-width: 470px;
+  width: 100%;
+  margin: 20px auto;
+  background-color: var(--primary-bg);
+}

@@ -6,7 +6,7 @@ const q = query(collection(db, "userinfo"), where("username", "==", username));
 
 const querySnapshot = await getDocs(q);
 
-  // console.log(querySnapshot.docs)
+  // console.log(querySnapshot)
   
   return querySnapshot.docs;
 
