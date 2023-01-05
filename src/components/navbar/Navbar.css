@@ -4,6 +4,9 @@
   height: 100vh;
   border: 1px solid var(--border-color);
   background-color: var(--secondary-bg);
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .navbar-wrapper{
@@ -36,4 +39,12 @@
   text-decoration: none;
   color: var(--primary-text);
   
+}
+
+.create-btn {
+  border: none;
+  display: flex;
+  align-items: center;
+  background: none;
+  font-size: inherit;
 }

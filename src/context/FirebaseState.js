@@ -5,12 +5,15 @@ import {createUserWithEmailAndPassword,
   signOut , onAuthStateChanged}
    from "firebase/auth";
 import {auth} from '../config/FirebaseConfig'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, limit, onSnapshot, query } from "firebase/firestore";
 import { db } from '../config/FirebaseConfig';
 
 const FirebaseState = ({children}) => {
+
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
+  const [allUsers,setAllUsers] = useState([]);
   
   const signup = (email,password)=>{
     return createUserWithEmailAndPassword(auth,email,password);
@@ -22,22 +25,37 @@ const FirebaseState = ({children}) => {
   }
   
   const logout = () =>{
+    localStorage.removeItem('authUser')
+    setUser(null)
     return signOut(auth);
   }
 
    
   // get all posts
-   const getAllPosts = async()=>{
-    const querySnapshot = await getDocs(collection(db, "posts"));
-    setPosts(querySnapshot.docs)
-    // querySnapshot.docs.map((doc) => {
+   const getAllPosts = ()=>{
+    const q = query(collection(db, "posts"));
+    // setPosts(querySnapshot.docs)
+    
+    onSnapshot(q, (querySnapshot) => {
+      setPosts(querySnapshot.docs);
+   })
+  //  console.log(posts)
+    // posts.map((doc) => {
     //   // doc.data() is never undefined for query doc snapshots
     //   console.log(doc.id, " => ", doc.data());
     //   console.log(doc.data().imageUrl)
     // });
   }
 
-  // console.log('post',posts)
+  // get all users
+  const getAllUsers = ()=>{
+    const q = query(collection(db, "userinfo"));
+    
+    onSnapshot(q, (querySnapshot) => {
+      setAllUsers(querySnapshot.docs);
+   })
+  }
+  // console.log(allUsers)
 
 
   useEffect(() => {
@@ -51,22 +69,24 @@ const FirebaseState = ({children}) => {
       }
       
     });
-    getAllPosts();
-  
     return () => {
       unsubscribe()
     }
     
-  }, [posts])
+  }, [])
+  
+  useEffect(() => {
+    getAllPosts()
+    getAllUsers()
+  }, [])
   
 
- 
 
   
 
 
   return (
-    <firebaseContex.Provider  value={{signup, login,logout,user,posts}}>
+    <firebaseContex.Provider  value={{signup, login,logout,user,posts,allUsers}}>
       {children}
     </firebaseContex.Provider>
   )

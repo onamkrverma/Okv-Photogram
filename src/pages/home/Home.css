@@ -1,5 +1,7 @@
 .home-page-container{
   display:flex;
+  justify-content: center;
+  position: relative;
   
 }
 .story-post-wrapper{
@@ -7,4 +9,69 @@
   width: 100%;
   margin: 20px auto;
   background-color: var(--primary-bg);
+  
+}
+
+.upload-model-container{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  backdrop-filter: brightness(0.4);
+}
+
+.cancel-btn{
+  position: absolute;
+  top: 15px ;
+  right: 15px;
+  border: none;
+  width: 35px;
+  background: none;
+  color: var(--primary-bg);
+}
+
+.userprofile-suggestion-wrapper {
+  width: 100%;
+  max-width: 300px;
+  position: absolute;
+  right: 2%;
+  top: 4%;
+}
+.userprofile-wrapper{
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.userprofile-image-wrapper{
+  width: 50px;
+}
+.userprofile-image-wrapper  img{
+  width: 100%;
+  height: 100%;
+}
+
+.username-fullname-wrapper, .username-wrapper{
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-text);
+}
+.username-fullname-wrapper{
+  margin-left: 15px; 
+}
+.fullname-wrapper{
+  font-size: 14px;
+  color: var(--secondary-text);
+  font-weight: 400;
+}
+
+.suggestion-wrapper , .suggestion-user-list{
+  margin-top: 15px;
+}
+.suggestion-title{
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+.suggestion-user-list .userprofile-image-wrapper{
+  width: 30px;
 }

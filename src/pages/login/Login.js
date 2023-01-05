@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import firebaseContex from '../../context/FirebaseContex'
 import './Login.css'
@@ -15,12 +15,14 @@ const Login = () => {
 
   const invalid = (password.length < 6) || email === '';
 
-
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      const loginUser = await login(email, password);
+      localStorage.setItem('authUser',JSON.stringify(loginUser.user))
+      // console.log('loginuser',loginUser )
       navigate('/')
 
     } catch (error) {
@@ -29,6 +31,12 @@ const Login = () => {
     }
 
   }
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('authUser'))) {
+      navigate('/')
+    }
+  }, [navigate])
 
 
   return (

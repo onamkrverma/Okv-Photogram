@@ -1,10 +1,18 @@
 import React from 'react'
 import './Navbar.css'
 import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import ImageUpload from '../imageUpload/ImageUpload'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({isUpload,setIsUpload,logout}) => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = ()=>{
+    logout()
+    navigate('/login')
+  }
+
+
   return (
     <div className="navbar-container">
       <div className="navbar-wrapper">
@@ -35,15 +43,23 @@ const Navbar = () => {
             <div className="menu-title">Explore</div>
           </div>
           <div className='post-menu-wrapper menu-wrapper'>
+            <button
+             type='button'
+              className='create-btn cur-point'
+              onClick={()=>setIsUpload(!isUpload)}
+              >
             <div className="icon absolute-center">
               <MdOutlineAddBox style={{ width: '100%', height: '100%' }} />
             </div>
-            <div className="menu-title">Create</div>
+            <div className="menu-title">
+              Create
+            </div>
+            </button>
           </div>
           <div className="profile-menu-wrapper menu-wrapper">
             {/* profile */}
           </div>
-          <ImageUpload />
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>

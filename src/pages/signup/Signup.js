@@ -2,11 +2,10 @@ import React, { useContext, useState } from 'react'
 import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
 import firebaseContex from '../../context/FirebaseContex'
-import { db } from '../../config/FirebaseConfig'
+import { db, auth} from '../../config/FirebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 import usernameChecker from './UsernameCheker'
 import { updateProfile } from 'firebase/auth'
-import { auth } from '../../config/FirebaseConfig'
 
 
 const Signup = () => {
@@ -27,7 +26,7 @@ const Signup = () => {
     if (!usernameList.length) {
       try {
         const createUser = await signup(email, password);
-
+        localStorage.setItem('authUser',JSON.stringify(createUser.user))
         // add userinfo to firebase database
         await updateProfile(auth.currentUser,{
           displayName: username
