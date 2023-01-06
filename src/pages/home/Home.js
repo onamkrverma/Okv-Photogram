@@ -9,21 +9,23 @@ import './Home.css'
 import { RxCross2 } from 'react-icons/rx';
 
 const Home = () => {
-  const { logout, posts, user, allUsers } = useContext(firebaseContex);
+  const { logout, posts, allUsers } = useContext(firebaseContex);
   const navigate = useNavigate()
 
   const [isUpload, setIsUpload] = useState(false);
 
+  const loaclUser = JSON.parse(localStorage.getItem('authUser'))
+
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('authUser')) === null) {
+    if (loaclUser === null) {
       navigate('/login')
     }
-  }, [navigate])
+  }, [loaclUser])
 
 
 
   const filterCurrentUser = allUsers.filter((value)=>{
-    return (user.uid).includes(value.id)
+    return (loaclUser?.uid).includes(value.id)
     
   })
 
@@ -38,7 +40,7 @@ const Home = () => {
         <div className="post-conatiner">
           {
             posts.map((post) =>
-              <PostCard key={post.id} post={post.data()} />
+              <PostCard key={post.id} post={post.data()} postId={post.id}/>
             )
           }
         </div>
@@ -71,7 +73,7 @@ const Home = () => {
           </div>
           <div className="username-fullname-wrapper">
             <div className="username-wrapper">
-              {user.displayName}
+              {loaclUser?.displayName}
             </div>
             {
               filterCurrentUser.map((name)=>

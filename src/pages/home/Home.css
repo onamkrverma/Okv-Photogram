@@ -19,6 +19,7 @@
   height: 100vh;
   overflow: hidden;
   backdrop-filter: brightness(0.4);
+  z-index: 5;
 }
 
 .cancel-btn{
@@ -36,7 +37,7 @@
   max-width: 300px;
   position: absolute;
   right: 2%;
-  top: 4%;
+  top: 5%;
 }
 .userprofile-wrapper{
   display: flex;

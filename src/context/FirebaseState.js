@@ -5,7 +5,7 @@ import {createUserWithEmailAndPassword,
   signOut , onAuthStateChanged}
    from "firebase/auth";
 import {auth} from '../config/FirebaseConfig'
-import { collection, limit, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from '../config/FirebaseConfig';
 
 const FirebaseState = ({children}) => {
@@ -55,7 +55,7 @@ const FirebaseState = ({children}) => {
       setAllUsers(querySnapshot.docs);
    })
   }
-  // console.log(allUsers)
+  
 
 
   useEffect(() => {

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
-import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox } from 'react-icons/md'
+import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox ,MdOutlineMenu} from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = ({isUpload,setIsUpload,logout}) => {
+
+  const [isMenuMore, setIsMenuMore] = useState(false)
 
   const navigate = useNavigate();
 
@@ -46,6 +48,7 @@ const Navbar = ({isUpload,setIsUpload,logout}) => {
             <button
              type='button'
               className='create-btn cur-point'
+              title='create post'
               onClick={()=>setIsUpload(!isUpload)}
               >
             <div className="icon absolute-center">
@@ -56,10 +59,37 @@ const Navbar = ({isUpload,setIsUpload,logout}) => {
             </div>
             </button>
           </div>
-          <div className="profile-menu-wrapper menu-wrapper">
-            {/* profile */}
+          {/* <div className="profile-menu-wrapper menu-wrapper">
+            profile
+          </div> */}
+          <div className="more-menu-wrapper menu-wrapper">
+            <button
+            type='button'
+            title='more options'
+            className='more-menue-btn create-btn cur-point'
+            onClick={()=>setIsMenuMore(!isMenuMore)}
+            >
+            <div className=" icon">
+              <MdOutlineMenu style={{width:'100%',height:'100%'}}/>
+            </div>
+            <div className="menu-title">
+              More
+            </div>
+            </button>
+            <div className="more-menu-options-wrapper" style={{display: isMenuMore?'flex':'none'}}>
+              <div className="logut-wrapper">
+                <button
+                type='button'
+                title='logout'
+                className='logout-btn cur-point'
+                 onClick={handleLogout}
+                 >Logout</button>
+              </div>
+            </div>
+
+
           </div>
-          <button onClick={handleLogout}>Logout</button>
+          
         </div>
       </div>
     </div>

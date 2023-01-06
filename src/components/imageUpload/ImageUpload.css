@@ -11,7 +11,9 @@
  padding: 20px 15px;
  width: 90%;
 }
-
+.image-upload-wrapper .button-wrapper{
+  margin: 0;
+}
 .caption-textarea{
   height: 100px;
   outline: none;
@@ -19,7 +21,9 @@
   border-radius: 5px;
   margin-bottom: 15px;
   font-size: 16px;
-  border: 1px solid var(--border-color)
+  border: 1px solid var(--border-color);
+  width: 100%;
+  
 }
 .image-select-input,.upload-btn{
   margin-bottom: 15px;

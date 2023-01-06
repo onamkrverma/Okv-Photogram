@@ -48,3 +48,29 @@
   background: none;
   font-size: inherit;
 }
+
+.more-menu-wrapper{
+  position: relative;
+  
+}
+.more-menu-options-wrapper{
+  position: absolute;
+  bottom: 55px;
+  width: 100%;
+  align-items: center;
+  box-shadow: var(--border-color) 0px 0px 4px 2px;
+  border-radius: 8px;
+}
+.logut-wrapper {
+  border-top: 1px solid var(--border-color);
+  padding: 5px;
+  background: var(--primary-bg);
+  width: 100%;
+}
+.logout-btn{
+  border: none;
+  background: none;
+  width: 100%;
+  color: var(--primary-text);
+  font-size: 15px;
+}

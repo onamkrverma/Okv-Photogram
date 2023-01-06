@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Loading from '../../components/loading/Loading'
 import firebaseContex from '../../context/FirebaseContex'
 import './Login.css'
 
@@ -7,7 +8,8 @@ const Login = () => {
   const { login } = useContext(firebaseContex)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [loading, setLoading] = useState(false);
+const loaclUser = JSON.parse(localStorage.getItem('authUser'))
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate()
@@ -19,10 +21,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const loginUser = await login(email, password);
       localStorage.setItem('authUser',JSON.stringify(loginUser.user))
       // console.log('loginuser',loginUser )
+      setLoading(false)
       navigate('/')
 
     } catch (error) {
@@ -32,11 +36,13 @@ const Login = () => {
 
   }
 
+  
+
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('authUser'))) {
+    if (loaclUser) {
       navigate('/')
     }
-  }, [navigate])
+  }, [loaclUser])
 
 
   return (
@@ -89,9 +95,12 @@ const Login = () => {
                   disabled={invalid}
                   type='submit'
                   className='login-button cur-point'
-                  style={{ opacity: invalid && '0.5' }}
-                >Log In
+                  style={{ opacity: (invalid || loading) && '0.5' }}
+                >
+                  Log In
                 </button>
+                {loading && <Loading/>}
+                
               </div>
             </form>
             {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
