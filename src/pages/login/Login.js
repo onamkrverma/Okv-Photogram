@@ -31,7 +31,11 @@ const loaclUser = JSON.parse(localStorage.getItem('authUser'))
 
     } catch (error) {
       e.target.reset();
-      setErrorMessage(error.message)
+      setLoading(false)
+        setErrorMessage(error.message.replace('Firebase:',''));
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 5000);
     }
 
   }

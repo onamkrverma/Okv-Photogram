@@ -105,3 +105,23 @@
   width: 100%;
   height: 100%;
 }
+
+/* responsive for mobile */
+@media (max-width:426px){
+  .login-poster{
+    display: none;
+  }
+  .logo-wrapper .instagram-logo {
+    height: 70px;
+    width: 200px;
+  }
+  .login-box {
+    background: none;
+    border: none;
+  }
+  .login-form-wrapper {
+    padding: 0 20px 20px;
+    width: 100%;
+}
+
+}

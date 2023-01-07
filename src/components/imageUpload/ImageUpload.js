@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import './ImageUpload.css'
 import { storage, db, auth } from '../../config/FirebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { addDoc, collection, serverTimestamp, } from 'firebase/firestore';
 import Loading from '../loading/Loading';
+import { RxCross2 } from 'react-icons/rx';
+import firebaseContex from '../../context/FirebaseContex';
 
 
 const ImageUpload = () => {
+  const { isUpload,setIsUpload } = useContext(firebaseContex);
+
+
   const [image, setImage] = useState('');
   const [caption, setCaption] = useState('');
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState('');
-
+  const imageRef = useRef();
   const [loading, setLoading] = useState(false);
 
 
-  const handleUpload = (e) => {
-    
-    e.preventDefault()
+  const handleUpload = () => {
+
     if (image) {
       setLoading(true)
       const storageRef = ref(storage, `/images/${image.name}`);
@@ -29,8 +33,10 @@ const ImageUpload = () => {
         },
         (error) => {
           console.log(error);
-          e.target.rest();
+          setCaption('')
+          imageRef.current.value = ''
           setProgress(0)
+          setLoading(false)
           setMessage(error.message)
         },
         async () => {
@@ -52,59 +58,75 @@ const ImageUpload = () => {
             })
 
 
-          e.target.rest();
+          setCaption('')
+          imageRef.current.value = ''
           setProgress(0);
-          setMessage('upload success');
           setLoading(false);
+          setMessage('Upload Success');
+
 
         }
       );
     }
+    
 
   }
 
 
   return (
+    <div className="upload-model-container absolute-center" style={{ display: isUpload ? 'flex' : 'none' }} >
+
     <div className="image-upload-container absolute-center" >
 
       <div className='image-upload-wrapper' >
-        <form >
-          <textarea
-            type="text"
-            placeholder='Enter captions'
-            className='caption-textarea'
-            onChange={(e) => setCaption(e.target.value)}
-          />
-          <input type="file"
-            title='select image'
-            placeholder='select image'
-            onChange={(e) => setImage(e.target.files[0])}
-            accept="image/*"
-            className='image-select-input' 
-            />
 
-          <div className="button-wrapper">
-            <button
-              type='button'
-              title='upload'
-              onClick={handleUpload}
-              disabled={!image} 
-              className='upload-btn login-button cur-point'
-              style={{ opacity: (!image || loading) && '0.5' }}
-            >
-              Upload
-            </button>
-            {loading && <Loading />}
-          </div>
-        </form>
-        <p>File upload at {progress}</p>
-        <div>
-          <p>{message}</p>
+        <textarea
+          type="text"
+          placeholder='Enter captions'
+          className='caption-textarea'
+          onChange={(e) => setCaption(e.target.value)}
+          value={caption}
+        />
+        <input type="file"
+          title='select image'
+          placeholder='select image'
+          onChange={(e) => setImage(e.target.files[0])}
+          accept="image/*"
+          className='image-select-input'
+          ref={imageRef}
+        />
+
+        <div className="button-wrapper">
+          <button
+            type='button'
+            title='upload'
+            onClick={handleUpload}
+            disabled={!image}
+            className='upload-btn login-button cur-point'
+            style={{ opacity: (!image || loading) && '0.5' }}
+          >
+            Upload
+          </button>
+          {loading && <Loading />}
         </div>
+
+        <p>Image upload completed {progress} %</p>
+        {message &&<div>
+           <p>{message}</p>
+        </div>}
 
       </div>
 
     </div>
+    <button
+          type='button'
+          title='cancel button'
+          className='cancel-btn cur-point'
+          onClick={() => setIsUpload(false)}
+        >
+          <RxCross2 style={{ height: '100%', width: '100%' }} />
+        </button>
+      </div>
   )
 }
 

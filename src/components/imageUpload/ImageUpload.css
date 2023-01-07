@@ -31,3 +31,9 @@
 
 
 
+/* responsive for mobile */
+@media (max-width:426px){
+  .upload-model-container{
+    top: 0px;
+  }
+}

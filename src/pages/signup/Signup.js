@@ -6,6 +6,7 @@ import { db, auth} from '../../config/FirebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 import usernameChecker from './UsernameCheker'
 import { updateProfile } from 'firebase/auth'
+import Loading from '../../components/loading/Loading'
 
 
 const Signup = () => {
@@ -15,6 +16,7 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -22,6 +24,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const usernameList = await usernameChecker(username)
     if (!usernameList.length) {
       try {
@@ -42,12 +45,13 @@ const Signup = () => {
             dateCreated: new Date()
           }
         )
-
+        setLoading(false)
         navigate('/')
 
       } catch (error) {
         console.log(error)
         e.target.reset();
+        setLoading(false)
         setErrorMessage(error.message.replace('Firebase:',''));
         setTimeout(() => {
           setErrorMessage('')
@@ -138,6 +142,7 @@ const Signup = () => {
                   style={{ opacity: invalid && '0.5' }}
                 >Sign Up
                 </button>
+                {loading && <Loading/>}
               </div>
 
             </form>

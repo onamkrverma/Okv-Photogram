@@ -1,16 +1,19 @@
 .story-container{
   border: 1px solid var(--border-color);
   margin-top: 16px;
-  padding: 16px 0;
+  padding: 16px 10px;
   border-radius: 8px;
   background-color: var(--secondary-bg);
+  width: 100%;
+  overflow-x: auto;
 }
 .story-wrapper{
-  margin: 0px 16px;
+  margin-right: 20px;
   width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .story-profile-image {
@@ -19,6 +22,7 @@
   border-radius: 50%;
   padding: 8px;
   background: var(--border-color);
+  margin-bottom: 5px;
 }
 
 
@@ -26,5 +30,22 @@
   font-size: 12px;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 500;
+  width: 40px;
+  white-space: nowrap;
+  color: var(--primary-text);
 
+}
+
+::-webkit-scrollbar{
+  height: 0px;
+}
+
+/* responsive for mobile */
+@media (max-width:426px){
+  .story-container{
+    margin: 0;
+    border: none;
+    background: none;
+  }
 }

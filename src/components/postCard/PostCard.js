@@ -67,12 +67,16 @@ const PostCard = ({ post, postId }) => {
           <img src={post.imageUrl} alt="post" />
         </div>
         <div className="card-bottom">
-          <div className="like-comments-wrapper align-center">
+          <div className="post-like-comments-wrapper align-center">
               <div className="like-icon absolute-center">
-              <button type='button'
+              <button 
+              type='button'
+              title='like'
               onClick={handleLikes}
               className='like-btn cur-point'>
-                <FiHeart style={{ width: '100%', height: '100%', fill: likesCount > 0 && 'red', color: likesCount > 0 && 'red' }} />
+                <FiHeart 
+                style={{ width: '100%', height: '100%', fill: post.likes > 0 && 'red', color: post.likes > 0 && 'red' }} 
+                />
               </button>
               </div>
             
@@ -80,10 +84,10 @@ const PostCard = ({ post, postId }) => {
               <FaRegComment style={{ width: '100%', height: '100%' }} />
             </div>
           </div>
-          <div className="like-count-wrapper">
+          <div className="like-count-wrapper ">
             {post.likes} Likes
           </div>
-          <div className="username-caption-wrapper align-center">
+          <div className="username-caption-wrapper align-center ">
             <div className="profile-username">
               {post.username}
             </div>

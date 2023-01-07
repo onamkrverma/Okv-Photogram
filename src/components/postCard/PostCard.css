@@ -61,15 +61,20 @@
   margin-right: 10px;
 
 }
-.comments-icon {
+.comments-icon svg {
   transform: rotateY(180deg);
 }
 .card-bottom .profile-username {
   margin: 0;
 }
 
-
-
+.like-count-wrapper {
+  font-weight: 500;
+  margin: 5px 0;
+}
+.username-caption-wrapper{
+  margin: 5px 0;
+}
 .caption-wrapper {
   font-size: 14px;
   margin-left: 15px;
@@ -105,4 +110,13 @@
   font-size: 15px;
   font-weight: 500;
   color: var(--primary-btn-bg);
+}
+
+/* responsive for mobile */
+@media (max-width:426px){
+  .card-container{
+    margin-top:0 ;
+    margin-bottom: 10px;
+    border-radius: 0px;
+  }
 }

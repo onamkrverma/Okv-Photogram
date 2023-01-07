@@ -10,10 +10,14 @@ import { db } from '../config/FirebaseConfig';
 
 const FirebaseState = ({children}) => {
 
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
   const [posts, setPosts] = useState([]);
   const [allUsers,setAllUsers] = useState([]);
+
+// for toggle upload model
+  const [isUpload, setIsUpload] = useState(false);
+  // for loading
+  const [loading, setLoading] = useState(true)
   
   const signup = (email,password)=>{
     return createUserWithEmailAndPassword(auth,email,password);
@@ -38,7 +42,9 @@ const FirebaseState = ({children}) => {
     
     onSnapshot(q, (querySnapshot) => {
       setPosts(querySnapshot.docs);
-   })
+      setLoading(false);
+   });
+   
   //  console.log(posts)
     // posts.map((doc) => {
     //   // doc.data() is never undefined for query doc snapshots
@@ -53,6 +59,7 @@ const FirebaseState = ({children}) => {
     
     onSnapshot(q, (querySnapshot) => {
       setAllUsers(querySnapshot.docs);
+      setLoading(false)
    })
   }
   
@@ -86,7 +93,8 @@ const FirebaseState = ({children}) => {
 
 
   return (
-    <firebaseContex.Provider  value={{signup, login,logout,user,posts,allUsers}}>
+    <firebaseContex.Provider 
+     value={{signup, login,logout,user,posts,allUsers,isUpload,setIsUpload,loading}}>
       {children}
     </firebaseContex.Provider>
   )
