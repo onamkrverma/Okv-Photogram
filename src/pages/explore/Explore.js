@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FaComment } from 'react-icons/fa'
 import { FiHeart } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Navbar from '../../components/navbar/Navbar'
 import firebaseContex from '../../context/FirebaseContex'
@@ -9,8 +10,15 @@ import ExploreCardSkeleton from './ExploreCardSkeleton'
 
 
 const Explore = () => {
-  const { posts, loading } = useContext(firebaseContex)
+  const { posts, loading } = useContext(firebaseContex);
+  const navigate = useNavigate();
+  const loaclUser = JSON.parse(localStorage.getItem('authUser'));
 
+  useEffect(() => {
+    if (loaclUser === null) {
+      navigate('/login')
+    }
+  }, [loaclUser])
 
   return (
     <div className='explore-page-container'>

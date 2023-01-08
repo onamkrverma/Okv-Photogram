@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../../components/imageUpload/ImageUpload';
 import Navbar from '../../components/navbar/Navbar';
@@ -8,28 +8,30 @@ import Story from '../../components/stories/Story';
 import firebaseContex from '../../context/FirebaseContex';
 import './Home.css'
 
+
 const Home = () => {
   const { posts, allUsers, loading } = useContext(firebaseContex);
   const navigate = useNavigate()
+  const [currentUser, setCurrentUser] = useState('')
 
   // const [isUpload, setIsUpload] = useState(false);
 
-  const loaclUser = JSON.parse(localStorage.getItem('authUser'))
+  const localUser = JSON.parse(localStorage.getItem('authUser'))
 
   useEffect(() => {
-    if (loaclUser === null) {
+    if (localUser === null) {
       navigate('/login')
     }
-  }, [loaclUser])
+  }, [localUser])
 
 
 
   const filterCurrentUser = allUsers.filter((value) => {
-    return (loaclUser?.uid).includes(value.id)
+    return (localUser?.uid).includes(value.id)
 
   })
 
-
+  
 
   return (
     <div className='home-page-container'>
@@ -40,7 +42,7 @@ const Home = () => {
           className='instagram-logo'
         />
       </div>
-      <Navbar />
+      <Navbar/>
       <div className='story-post-wrapper'>
         <Story />
         <div className="post-conatiner">
@@ -108,7 +110,6 @@ const Home = () => {
         </div>
 
       </div>
-
 
 
 

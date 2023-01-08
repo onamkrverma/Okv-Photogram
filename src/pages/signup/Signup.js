@@ -30,11 +30,12 @@ const Signup = () => {
     if (!usernameList.length) {
       try {
         const createUser = await signup(email, password);
-        localStorage.setItem('authUser',JSON.stringify(createUser.user))
-        // add userinfo to firebase database
         await updateProfile(auth.currentUser,{
           displayName: username
         });
+        localStorage.setItem('authUser',JSON.stringify(createUser.user))
+        // add userinfo to firebase database
+        
         const userRef = doc(db, 'userinfo', createUser.user.uid)
         
         await setDoc(userRef,
@@ -140,7 +141,7 @@ const Signup = () => {
                   disabled={invalid}
                   type='submit'
                   className='login-button cur-point'
-                  style={{ opacity: invalid && '0.5' }}
+                  style={{ opacity: (invalid || loading) && '0.5' }}
                 >Sign Up
                 </button>
                 {loading && <Loading/>}

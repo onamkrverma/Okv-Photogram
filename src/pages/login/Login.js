@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-const loaclUser = JSON.parse(localStorage.getItem('authUser'))
+const localUser = JSON.parse(localStorage.getItem('authUser'))
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate()
@@ -44,10 +44,10 @@ const loaclUser = JSON.parse(localStorage.getItem('authUser'))
   
 
   useEffect(() => {
-    if (loaclUser) {
+    if (localUser) {
       navigate('/')
     }
-  }, [loaclUser])
+  }, [localUser])
 
 
   return (

@@ -1,15 +1,21 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter,Routes,Route} from "react-router-dom";
 import FirebaseState from "./context/FirebaseState";
-import Explore from "./pages/explore/Explore";
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import Signup from "./pages/signup/Signup";
+import LoadInstagram from "./components/loading/LoadInstagram";
+
+
+const Login = lazy(()=> import ('./pages/login/Login'));
+const Signup = lazy(()=> import ('./pages/signup/Signup'));
+const Home = lazy(()=> import ('./pages/home/Home'));
+const Explore = lazy(()=> import ('./pages/explore/Explore'));
 
 function App() {
+
   return (
     <>
     <FirebaseState>
     <BrowserRouter>
+    <Suspense fallback={<LoadInstagram/> }>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
@@ -17,6 +23,7 @@ function App() {
       <Route path='/explore' element={<Explore/>}/>
     
     </Routes>
+    </Suspense>
     </BrowserRouter>
     </FirebaseState>
     </>

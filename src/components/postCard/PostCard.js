@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './PostCard.css';
 import { FiHeart, FiSmile } from 'react-icons/fi';
 import { FaRegComment } from 'react-icons/fa';
 import { updateDoc,arrayUnion, doc } from "firebase/firestore";
 import { db } from '../../config/FirebaseConfig';
+import firebaseContex from '../../context/FirebaseContex';
 
 
 const PostCard = ({ post, postId }) => {
   const [likesCount, setLikesCount] = useState(post.likes)
   const [comments, setComments] = useState('')
-  const loaclUser = JSON.parse(localStorage.getItem('authUser'))
+  const localUser = JSON.parse(localStorage.getItem('authUser'))
 
   const invalid = (comments === '');
+
+  
+
+  
 
   const handleLikes = async () => {
     setLikesCount(likesCount + 1)
@@ -32,7 +37,7 @@ const PostCard = ({ post, postId }) => {
       await updateDoc(doc(db, 'posts',postId), {
       
         comments: arrayUnion ({
-            username: loaclUser.displayName,
+            username: localUser.displayName,
             comment: comments
           })
         
