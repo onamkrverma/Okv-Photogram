@@ -1,0 +1,8 @@
+.footer-section{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  padding: 5px 0;
+}

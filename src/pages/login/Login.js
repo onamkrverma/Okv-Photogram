@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Footer from '../../components/footer/Footer'
 import Loading from '../../components/loading/Loading'
 import firebaseContex from '../../context/FirebaseContex'
 import './Login.css'
@@ -120,6 +121,7 @@ const loaclUser = JSON.parse(localStorage.getItem('authUser'))
 
         </div>
       </div>
+      <Footer/>
     </div>
 
   )

@@ -66,6 +66,7 @@
 }
 .card-bottom .profile-username {
   margin: 0;
+  white-space: nowrap;
 }
 
 .like-count-wrapper {
@@ -79,6 +80,7 @@
   font-size: 14px;
   margin-left: 15px;
   color: var(--primary-text);
+  width: 100%;
 }
 
 

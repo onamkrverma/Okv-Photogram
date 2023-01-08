@@ -49,7 +49,7 @@ const Explore = () => {
                       <FaComment style={{ width: '85%', height: '85%', fill: 'white' }} />
                     </div>
                     <div className="commets-counts">
-                      89
+                      {post.data().comments.length}
                     </div>
                   </div>
                 </div>

@@ -7,6 +7,7 @@ import { doc, setDoc } from 'firebase/firestore'
 import usernameChecker from './UsernameCheker'
 import { updateProfile } from 'firebase/auth'
 import Loading from '../../components/loading/Loading'
+import Footer from '../../components/footer/Footer'
 
 
 const Signup = () => {
@@ -159,6 +160,7 @@ const Signup = () => {
 
         </div>
       </div>
+      <Footer/>
     </div>
 
   )

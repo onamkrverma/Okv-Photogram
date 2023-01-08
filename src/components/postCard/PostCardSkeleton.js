@@ -14,7 +14,7 @@ const PostCardSkeleton = () => {
             <Skeleton circle={true} height={42} width={42} />
           </div>
           <div className="profile-username">
-            <Skeleton/>
+            <Skeleton width={65}/>
           </div>
         </div>
         <div className="post-wrapper">

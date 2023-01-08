@@ -4,6 +4,7 @@
   background: var(--primary-bg);
   padding-top: 32px;
   height: 100vh;
+  position: relative;
 }
 
 

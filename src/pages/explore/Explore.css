@@ -1,3 +1,7 @@
+.explore-page-container{
+  display: flex;
+  flex-direction: column;
+}
 .explore-section {
   width: calc(100% - 245px);
   display: flex;
