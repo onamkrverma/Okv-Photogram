@@ -107,3 +107,12 @@
   }
 
 }
+
+/* responsive for tablet */
+
+@media (min-width:426px) and (max-width:769px){
+  .navbar-container{
+    width: auto;
+  }
+
+}

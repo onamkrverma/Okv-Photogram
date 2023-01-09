@@ -102,7 +102,7 @@ const ImageUpload = () => {
             title='upload'
             onClick={handleUpload}
             disabled={!image}
-            className='upload-btn login-button cur-point'
+            className='upload-btn  cur-point'
             style={{ opacity: (!image || loading) && '0.5' }}
           >
             Upload

@@ -63,6 +63,7 @@ const Signup = () => {
     }
     else {
       setErrorMessage("Username already taken")
+      setLoading(false);
       setTimeout(() => {
         setErrorMessage('')
       }, 3000);

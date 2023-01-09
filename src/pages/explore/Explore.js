@@ -12,13 +12,13 @@ import ExploreCardSkeleton from './ExploreCardSkeleton'
 const Explore = () => {
   const { posts, loading } = useContext(firebaseContex);
   const navigate = useNavigate();
-  const loaclUser = JSON.parse(localStorage.getItem('authUser'));
+  const localUser = JSON.parse(localStorage.getItem('authUser'));
 
   useEffect(() => {
-    if (loaclUser === null) {
+    if (localUser === null) {
       navigate('/login')
     }
-  }, [loaclUser])
+  }, [localUser])
 
   return (
     <div className='explore-page-container'>

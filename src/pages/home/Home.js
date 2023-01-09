@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ImageUpload from '../../components/imageUpload/ImageUpload';
 import Navbar from '../../components/navbar/Navbar';
@@ -11,12 +11,11 @@ import './Home.css'
 
 const Home = () => {
   const { posts, allUsers, loading } = useContext(firebaseContex);
-  const navigate = useNavigate()
-  const [currentUser, setCurrentUser] = useState('')
+  const navigate = useNavigate();
 
-  // const [isUpload, setIsUpload] = useState(false);
 
   const localUser = JSON.parse(localStorage.getItem('authUser'))
+
 
   useEffect(() => {
     if (localUser === null) {
@@ -25,13 +24,14 @@ const Home = () => {
   }, [localUser])
 
 
+const suggestedUsers = allUsers.filter((val)=> {
+  return (localUser?.uid) !== (val.id) ;
+ })
 
-  const filterCurrentUser = allUsers.filter((value) => {
-    return (localUser?.uid).includes(value.id)
-
-  })
-
-  
+ const currentUserInfo = allUsers.filter((val)=>{
+  return (localUser?.uid).includes(val.id);
+ })
+ 
 
   return (
     <div className='home-page-container'>
@@ -66,7 +66,7 @@ const Home = () => {
             />
           </div>
 
-          {filterCurrentUser.map((currentUser) =>
+          {currentUserInfo.map((currentUser) =>
             <div className="username-fullname-wrapper" key={currentUser.id}>
               <div className="username-wrapper">
                 {currentUser.data().username}
@@ -86,7 +86,7 @@ const Home = () => {
           </div>
           <div className="suggestion-user-list">
             {
-              allUsers.slice(0, 5).map((users) =>
+              suggestedUsers.slice(0, 5).map((users) =>
                 <div className="userprofile-wrapper" key={users.id}>
                   <div className="userprofile-image-wrapper">
                     <img

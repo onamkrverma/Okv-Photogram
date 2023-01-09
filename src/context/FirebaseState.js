@@ -5,12 +5,12 @@ import {createUserWithEmailAndPassword,
   signOut , onAuthStateChanged}
    from "firebase/auth";
 import {auth} from '../config/FirebaseConfig'
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot,orderBy, query } from "firebase/firestore";
 import { db } from '../config/FirebaseConfig';
 
 const FirebaseState = ({children}) => {
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
+const localUser = JSON.parse(localStorage.getItem('authUser'));
+  const [user, setUser] = useState(localUser);
   const [posts, setPosts] = useState([]);
   const [allUsers,setAllUsers] = useState([]);
 
@@ -35,25 +35,21 @@ const FirebaseState = ({children}) => {
   }
 
    
-  // get all posts
+  // get all posts order by posted date 
    const getAllPosts = ()=>{
-    const q = query(collection(db, "posts"));
+    const postRef = collection(db,"posts");
+    const q = query(postRef, orderBy("datePostedOn", "desc"));
     // setPosts(querySnapshot.docs)
+
     
     onSnapshot(q, (querySnapshot) => {
       setPosts(querySnapshot.docs);
       setLoading(false);
    });
    
-  //  console.log(posts)
-    // posts.map((doc) => {
-    //   // doc.data() is never undefined for query doc snapshots
-    //   console.log(doc.id, " => ", doc.data());
-    //   console.log(doc.data().imageUrl)
-    // });
   }
 
-  // get all users
+  // get all users info
   const getAllUsers = ()=>{
     const q = query(collection(db, "userinfo"));
     
@@ -62,6 +58,8 @@ const FirebaseState = ({children}) => {
       setLoading(false)
    })
   }
+
+  
   
 
 
@@ -83,9 +81,11 @@ const FirebaseState = ({children}) => {
   }, [])
   
   useEffect(() => {
-    getAllPosts()
-    getAllUsers()
+    getAllPosts();
+    getAllUsers();
+    
   }, [])
+  
   
 
 

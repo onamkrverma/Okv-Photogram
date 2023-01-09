@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import './PostCard.css';
 import { FiHeart, FiSmile } from 'react-icons/fi';
 import { FaRegComment } from 'react-icons/fa';
 import { updateDoc,arrayUnion, doc } from "firebase/firestore";
 import { db } from '../../config/FirebaseConfig';
-import firebaseContex from '../../context/FirebaseContex';
 
 
 const PostCard = ({ post, postId }) => {
@@ -24,7 +23,6 @@ const PostCard = ({ post, postId }) => {
       await updateDoc(doc(db, 'posts', postId), {
         likes: likesCount,
       });
-      console.log('likes updates')
     } catch (error) {
       console.log(error)
     }
@@ -45,7 +43,7 @@ const PostCard = ({ post, postId }) => {
          
       });
       setComments('')
-      console.log('comments updates')
+      // console.log('comments updates')
     } 
     catch (error) {
       console.log(error)
@@ -54,7 +52,6 @@ const PostCard = ({ post, postId }) => {
 
   }
 
-  // console.log(post)
 
 
   return (

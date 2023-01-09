@@ -38,8 +38,8 @@
   margin: 36px 0 12px 0;
 }
 .instagram-logo{
-  height: 50px;
-  width: 174px;
+  height: 55px;
+  width: 154px;
 }
 
 
@@ -107,6 +107,13 @@
   height: 100%;
 }
 
+.guest-login-info-wrapper{
+  color: gray;
+}
+.guest-login-credential {
+  font-size: 12px;
+  margin: 5px;
+}
 /* responsive for mobile */
 @media (max-width:426px){
   .login-poster{

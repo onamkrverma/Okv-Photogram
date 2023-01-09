@@ -120,6 +120,18 @@ const localUser = JSON.parse(localStorage.getItem('authUser'))
           </div>
 
         </div>
+        <div className="guest-login-info-wrapper login-box">
+          <div className="title">
+            Create new account or login as a guest
+          </div>
+          <div className="guest-login-credential">
+          <div className="guest-email">
+            <p>Email: guest@gmail.com</p>
+          </div>
+          <div className="guest-password">
+            <p>Password: guest@1234</p>
+          </div></div>
+        </div>
       </div>
       <Footer/>
     </div>

@@ -88,6 +88,9 @@
 .suggestion-user-list .userprofile-image-wrapper {
   width: 30px;
 }
+ .top-instagram-logo {
+  display: none;
+ }
 
 /* responsive code for mobile */
 @media (max-width:426px) {
@@ -118,4 +121,18 @@
   .userprofile-suggestion-wrapper {
     display: none;
   }
+}
+
+/* responsive for tablet */
+
+@media (min-width:426px) and (max-width:769px){
+  .story-post-wrapper{
+    max-width: 370px;
+  }
+  .userprofile-suggestion-wrapper{
+    max-width: 180px;
+    right: 0px;
+  }
+
+  
 }
