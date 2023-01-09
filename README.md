@@ -5,8 +5,13 @@
  - User can login and signup with email-password authentication
  - User can post a image with caption
  - User can do like and comments on any post
- - Multipage layout
+ - Multipage layout (home and explore page)
  - Fully responsive
+ 
+ #### Upcoming features to be add 
+ - Follow and Unfollow
+ - User profile page
+ - many more..
  
 ## Technology used 
  - React js
@@ -20,7 +25,7 @@
   [![Netlify Status](https://api.netlify.com/api/v1/badges/0ac304c4-a7c5-4aeb-af7e-0115f09830e1/deploy-status)](https://instagramclone-onam.netlify.app/)
 
 ## Feedbacks
-**If you like this clone then please gives a start to this repo** 
+**If you like this clone then please gives a start ⭐ to this repo** 
 
 
 
