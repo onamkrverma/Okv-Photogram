@@ -35,6 +35,10 @@
   color: var(--primary-text);
 }
 
+.active-link{
+  font-weight: 700;
+}
+
 .menu-wrapper a{
   text-decoration: none;
   color: var(--primary-text);
@@ -48,11 +52,15 @@
   background: none;
   font-size: inherit;
 }
+.create-btn:focus{
+  font-weight: 700;
+}
 
 .more-menu-wrapper{
   position: relative;
   
 }
+
 .more-menu-options-wrapper{
   position: absolute;
   bottom: 55px;

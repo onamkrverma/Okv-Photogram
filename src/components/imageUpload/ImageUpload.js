@@ -51,7 +51,7 @@ const ImageUpload = () => {
               imageUrl: downloadURL,
               username: auth.currentUser.displayName,
               caption: caption,
-              likes: 0,
+              likes: [],
               comments: [],
               datePostedOn: serverTimestamp(),
 
@@ -62,7 +62,7 @@ const ImageUpload = () => {
           imageRef.current.value = ''
           setProgress(0);
           setLoading(false);
-          setMessage('Upload Success');
+          setMessage('Image Upload Successfully');
 
 
         }
@@ -110,7 +110,7 @@ const ImageUpload = () => {
           {loading && <Loading />}
         </div>
 
-        <p>Image upload completed {progress} %</p>
+        <p>Image upload {progress} % completed</p>
         {message &&<div>
            <p>{message}</p>
         </div>}

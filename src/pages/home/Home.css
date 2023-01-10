@@ -91,6 +91,23 @@
  .top-instagram-logo {
   display: none;
  }
+ .alert-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--primary-bg);
+  padding: 10px;
+  border-radius: 8px;
+  width: 250px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.alert-cancle-icon{
+  width: 20px;
+}
 
 /* responsive code for mobile */
 @media (max-width:426px) {
@@ -111,7 +128,9 @@
     height: 50px;
     width: 140px;
   }
-
+  .alert-box{
+    bottom: 70px;
+  }
   
   .story-post-wrapper{
     margin: 0;

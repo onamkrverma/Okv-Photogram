@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import './Navbar.css'
 import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox ,MdOutlineMenu} from 'react-icons/md'
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import firebaseContex from '../../context/FirebaseContex'
 
 const Navbar = () => {
@@ -28,25 +28,25 @@ const Navbar = () => {
         </div>
         <div className="nav-menu-wrapper">
           <div className='home-menu-wrapper  menu-wrapper'>
-            <Link to='/' className='align-center'>
+            <NavLink to='/' className={({isActive})=> isActive? 'active-link align-center':'align-center'}>
             <div className="icon absolute-center">
               <MdHomeFilled style={{ width: '100%', height: '100%' }} />
             </div>
             <div className="menu-title">
                 Home
             </div>
-            </Link>
+            </NavLink>
 
           </div>
           <div className='explore-menu-wrapper menu-wrapper'>
-            <Link to='/explore' className='align-center'>
+            <NavLink to='/explore' className={({isActive})=> isActive? 'active-link align-center':'align-center'}>
               <div className="icon absolute-center">
               <MdOutlineExplore style={{ width: '100%', height: '100%' }} />
             </div>
             <div className="menu-title">
                Explore 
               </div>
-              </Link>
+              </NavLink>
           </div>
           <div className='post-menu-wrapper menu-wrapper'>
             <button

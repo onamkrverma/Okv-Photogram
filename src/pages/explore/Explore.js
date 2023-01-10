@@ -49,7 +49,7 @@ const Explore = () => {
                       <FiHeart style={{ width: '85%', height: '85%', fill: 'white' }} />
                     </div>
                     <div className="like-counts">
-                      {post.data().likes}
+                      {post.data().likes.length}
                     </div>
                   </div>
                   <div className="comments-wrapper align-center">

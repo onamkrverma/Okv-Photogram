@@ -1,58 +1,82 @@
 import React, { useState } from 'react'
 import './PostCard.css';
-import { FiHeart, FiSmile } from 'react-icons/fi';
+import { FiHeart, FiSend, FiSmile } from 'react-icons/fi';
 import { FaRegComment } from 'react-icons/fa';
-import { updateDoc,arrayUnion, doc } from "firebase/firestore";
+import { updateDoc, arrayUnion, doc } from "firebase/firestore";
 import { db } from '../../config/FirebaseConfig';
 
 
-const PostCard = ({ post, postId }) => {
-  const [likesCount, setLikesCount] = useState(post.likes)
-  const [comments, setComments] = useState('')
-  const localUser = JSON.parse(localStorage.getItem('authUser'))
+const PostCard = ({ post, postId ,setAlertMessage}) => {
+  const [likesCount, setLikesCount] = useState(post.likes);
+  const [comments, setComments] = useState('');
+  const [isClick, setIsClick] = useState(false);
+  const localUser = JSON.parse(localStorage.getItem('authUser'));
 
   const invalid = (comments === '');
 
-  
-
-  
+  const isLiked = (post.likes).filter((value) => localUser.displayName.includes(value.username))
 
   const handleLikes = async () => {
-    setLikesCount(likesCount + 1)
     try {
+      setLikesCount(likesCount + 1)
+      setIsClick(true)
+      // setIsLiked(true)
+
+
       await updateDoc(doc(db, 'posts', postId), {
-        likes: likesCount,
+        likes: arrayUnion({
+          username: localUser.displayName,
+        }),
       });
+
+
     } catch (error) {
       console.log(error)
+      setAlertMessage(error.message)
     }
 
+    setTimeout(() => {
+      setIsClick(false)
+    }, 1000);
   }
 
   const handlePostComments = async () => {
 
     try {
-      await updateDoc(doc(db, 'posts',postId), {
-      
-        comments: arrayUnion ({
-            username: localUser.displayName,
-            comment: comments
-          })
-        
-           
-         
+      await updateDoc(doc(db, 'posts', postId), {
+
+        comments: arrayUnion({
+          username: localUser.displayName,
+          comment: comments
+        })
       });
       setComments('')
       // console.log('comments updates')
-    } 
+    }
     catch (error) {
       console.log(error)
+      setAlertMessage(error.message)
       setComments('')
     }
 
   }
 
 
+
+
+  const handleShare = async (username, caption) => {
+    const shareData = {
+      'title': 'Instagram Clone',
+      'text': `One amazing post is posted by ${username} with caption ${caption}`,
+      'url': document.location.href,
+    }
+    try {
+      await navigator.share(shareData)
+    } catch (error) {
+      console.log(error)
+      setAlertMessage(error.message)
+    }
+  }
 
   return (
     <div className='card-container'>
@@ -65,29 +89,39 @@ const PostCard = ({ post, postId }) => {
             {post.username}
           </div>
         </div>
-        <div className="post-wrapper">
+        <div className="post-wrapper absolute-center cur-point" onDoubleClick={handleLikes}>
           <img src={post.imageUrl} alt="post" />
+          <div className="large-like-icon" style={{ display: isClick ? 'block' : 'none' }}>
+            <FiHeart style={{ width: '100%', height: '100%', fill: 'white', color: 'white' }}
+            />
+          </div>
         </div>
         <div className="card-bottom">
           <div className="post-like-comments-wrapper align-center">
-              <div className="like-icon absolute-center">
-              <button 
-              type='button'
-              title='like'
-              onClick={handleLikes}
-              className='like-btn cur-point'>
-                <FiHeart 
-                style={{ width: '100%', height: '100%', fill: post.likes > 0 && 'red', color: post.likes > 0 && 'red' }} 
+            <div className="like-icon absolute-center">
+              <button
+                type='button'
+                title='like'
+                onClick={handleLikes}
+                className='like-btn cur-point'>
+                <FiHeart
+                  style={{
+                    width: '100%', height: '100%',
+                    fill: isLiked.length > 0 && 'red', color: isLiked.length > 0 && 'red'
+                  }}
                 />
               </button>
-              </div>
-            
+            </div>
+
             <div className="comments-icon absolute-center">
               <FaRegComment style={{ width: '100%', height: '100%' }} />
             </div>
+            <div className="share-icon absolute-center cur-point" onClick={() => handleShare(post.username, post.caption)}>
+              <FiSend style={{ width: '100%', height: '100%' }} />
+            </div>
           </div>
           <div className="like-count-wrapper ">
-            {post.likes} Likes
+            {post.likes.length} Likes
           </div>
           <div className="username-caption-wrapper align-center ">
             <div className="profile-username">
@@ -121,8 +155,8 @@ const PostCard = ({ post, postId }) => {
             type="text"
             className="comments-input"
             placeholder='Add a comment'
-            onChange={(e) => setComments(e.target.value)} 
-            value={comments ?? ''}/>
+            onChange={(e) => setComments(e.target.value)}
+            value={comments ?? ''} />
 
           <button
             disabled={invalid}

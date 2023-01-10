@@ -33,13 +33,19 @@
 
 .post-wrapper {
   width: 100%;
-
+  position: relative;
 }
 
 .post-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.large-like-icon {
+  display: none;
+  position: absolute;
+  width: 90px;
+  height: 90px;
 }
 
 .card-bottom {
@@ -54,7 +60,7 @@
   height: 100%;
 }
 .like-icon,
-.comments-icon,
+.comments-icon, .share-icon,
 .smile-icon {
   width: 24px;
   height: 24px;
