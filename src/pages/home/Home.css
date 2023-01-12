@@ -142,15 +142,14 @@
   }
 }
 
-/* responsive for tablet */
+/* responsive for large screen */
 
-@media (min-width:426px) and (max-width:769px){
+@media (min-width:426px) and (max-width:1024px){
   .story-post-wrapper{
     max-width: 370px;
   }
   .userprofile-suggestion-wrapper{
-    max-width: 180px;
-    right: 0px;
+    max-width: fit-content;
   }
 
   
