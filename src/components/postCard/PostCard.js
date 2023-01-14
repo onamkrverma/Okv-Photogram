@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import './PostCard.css';
 import { FiHeart, FiSend, FiSmile } from 'react-icons/fi';
 import { FaRegComment } from 'react-icons/fa';
-import { updateDoc, arrayUnion, doc } from "firebase/firestore";
+import { updateDoc, arrayUnion, doc, arrayRemove } from "firebase/firestore";
 import { db } from '../../config/FirebaseConfig';
 
 
-const PostCard = ({ post, postId ,setAlertMessage}) => {
+const PostCard = ({ post, postId, setAlertMessage }) => {
   const [likesCount, setLikesCount] = useState(post.likes);
   const [comments, setComments] = useState('');
   const [isClick, setIsClick] = useState(false);
@@ -14,23 +14,34 @@ const PostCard = ({ post, postId ,setAlertMessage}) => {
 
   const invalid = (comments === '');
 
-  const isLiked = (post.likes).filter((value) => localUser.displayName.includes(value.username))
+  const isLiked = (post.likes).filter((value) => (localUser.displayName) === (value.username))
+
 
   const handleLikes = async () => {
+    setIsClick(true);
     try {
-      setLikesCount(likesCount + 1)
-      setIsClick(true)
-      // setIsLiked(true)
+      // if already liked then remove like onclick
+      if (isLiked.length !== 0) {
+        setLikesCount(likesCount - 1)
+        await updateDoc(doc(db, 'posts', postId), {
+          likes: arrayRemove({
+            username: localUser.displayName,
+          }),
+        });
 
 
-      await updateDoc(doc(db, 'posts', postId), {
-        likes: arrayUnion({
-          username: localUser.displayName,
-        }),
-      });
-
-
-    } catch (error) {
+      }
+       // if not liked then add like onclick
+      else {
+        setLikesCount(likesCount + 1)
+        await updateDoc(doc(db, 'posts', postId), {
+          likes: arrayUnion({
+            username: localUser.displayName,
+          }),
+        });
+      }
+    }
+    catch (error) {
       console.log(error)
       setAlertMessage(error.message)
     }
@@ -67,7 +78,7 @@ const PostCard = ({ post, postId ,setAlertMessage}) => {
   const handleShare = async (username, caption) => {
     const shareData = {
       'title': 'Instagram Clone',
-      'text': `One amazing post is posted by ${username} with caption ${caption}`,
+      'text': `One amazing post is posted by ${username} with caption ${caption} follow link to view`,
       'url': document.location.href,
     }
     try {
@@ -91,7 +102,7 @@ const PostCard = ({ post, postId ,setAlertMessage}) => {
         </div>
         <div className="post-wrapper absolute-center cur-point" onDoubleClick={handleLikes}>
           <img src={post.imageUrl} alt="post" />
-          <div className="large-like-icon" style={{ display: isClick ? 'block' : 'none' }}>
+          <div className="large-like-icon" style={{ display: isClick ? 'block' : 'none'}}>
             <FiHeart style={{ width: '100%', height: '100%', fill: 'white', color: 'white' }}
             />
           </div>

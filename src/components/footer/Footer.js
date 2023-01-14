@@ -6,7 +6,7 @@ const Footer = () => {
     <div className='footer-section'>
       <p>This site created for educational purposes only!!</p>
       <p> &copy; 2023 created by ✌
-        <a href="https://onam.netlify.app/" target={'_blank'} rel="noreferrer" > onamkrverma</a>
+        <a href="https://onam.netlify.app/"  rel="noreferrer" target="_blank" > onamkrverma</a>
         </p>
     </div>
   )
