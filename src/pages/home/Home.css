@@ -5,10 +5,6 @@
 
 }
 
-.top-instagram-logo {
-  display: none;
-}
-
 .story-post-wrapper {
   max-width: 470px;
   width: 100%;
@@ -88,9 +84,7 @@
 .suggestion-user-list .userprofile-image-wrapper {
   width: 30px;
 }
- .top-instagram-logo {
-  display: none;
- }
+
  .alert-box {
   display: flex;
   align-items: center;

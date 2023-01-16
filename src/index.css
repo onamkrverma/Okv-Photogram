@@ -30,7 +30,7 @@ body{
 }
 .top-instagram-logo {
   display: none;
- }
+}
 
  /* responsive code for mobile */
 @media (max-width:426px) {
