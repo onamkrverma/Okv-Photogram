@@ -31,10 +31,10 @@ const Home = () => {
   })
 
   const currentUserInfo = allUsers.filter((val) => {
-    return (localUser?.uid).includes(val.id);
+    return (localUser?.uid) === (val.id);
   })
 
-
+  
   return (
     <div className='home-page-container'>
       <div className="top-instagram-logo">

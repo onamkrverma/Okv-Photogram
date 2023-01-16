@@ -28,3 +28,23 @@ body{
 .errorMessage{
   color: red;
 }
+.top-instagram-logo {
+  display: none;
+ }
+
+ /* responsive code for mobile */
+@media (max-width:426px) {
+  .top-instagram-logo {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    background: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 5px 0 0px 5px;
+  }
+
+  .top-instagram-logo .instagram-logo {
+    height: 50px;
+    width: 140px;
+  }
+}

@@ -39,9 +39,7 @@ const localUser = JSON.parse(localStorage.getItem('authUser'));
    const getAllPosts = ()=>{
     const postRef = collection(db,"posts");
     const q = query(postRef, orderBy("datePostedOn", "desc"));
-    // setPosts(querySnapshot.docs)
 
-    
     onSnapshot(q, (querySnapshot) => {
       setPosts(querySnapshot.docs);
       setLoading(false);
@@ -83,7 +81,7 @@ const localUser = JSON.parse(localStorage.getItem('authUser'));
   useEffect(() => {
     getAllPosts();
     getAllUsers();
-    
+
   }, [])
   
   
@@ -94,7 +92,7 @@ const localUser = JSON.parse(localStorage.getItem('authUser'));
 
   return (
     <firebaseContex.Provider 
-     value={{signup, login,logout,user,posts,allUsers,isUpload,setIsUpload,loading}}>
+     value={{signup, login,logout,user,posts,allUsers,isUpload,setIsUpload,loading,setLoading}}>
       {children}
     </firebaseContex.Provider>
   )

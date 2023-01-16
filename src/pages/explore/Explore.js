@@ -35,7 +35,7 @@ const Explore = () => {
 
       <div className="explore-section">
         {
-          loading ? <ExploreCardSkeleton />
+          loading ? <ExploreCardSkeleton number={6}/>
             :
             posts.map((post) =>
 

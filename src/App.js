@@ -8,6 +8,7 @@ const Login = lazy(()=> import ('./pages/login/Login'));
 const Signup = lazy(()=> import ('./pages/signup/Signup'));
 const Home = lazy(()=> import ('./pages/home/Home'));
 const Explore = lazy(()=> import ('./pages/explore/Explore'));
+const Profile = lazy(()=> import ('./pages/profile/Profile'))
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/explore' element={<Explore/>}/>
+      <Route path='/profile' element={<Profile/>}/>
     
     </Routes>
     </Suspense>
