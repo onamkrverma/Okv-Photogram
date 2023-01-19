@@ -1,9 +1,7 @@
-.profile-page-section {
+
+.profile-page-container {
   width: calc(100% - 245px);
   margin-left: auto;
-}
-.profile-page-container {
-  margin: 0 30px 20px;
 }
 
 .profile-datails-wrapper {
@@ -45,12 +43,9 @@
 
  /* responsive code for mobile */
  @media (max-width:426px) {
-  .profile-page-section{
-    width: 100%;
-    margin: 0;
-  }
   .profile-page-container{
     margin: 0;
+    width: 100%;
   }
   .profile-datails-wrapper{
     justify-content: flex-start;

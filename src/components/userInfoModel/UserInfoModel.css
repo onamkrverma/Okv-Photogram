@@ -1,0 +1,32 @@
+.set-username-fullname-model{
+position: fixed;
+top: 0px;
+width: 100%;
+height: 100vh;
+overflow: hidden;
+backdrop-filter: brightness(0.4);
+z-index: 10;
+}
+
+.set-username-fullname-wrapper {
+  width: 50%;
+  min-width: 250px;
+}
+
+.model-title {
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.set-username-fullname-box{
+  padding: 20px !important ;
+}
+
+/* responsive code for mobile */
+@media (max-width:426px) {
+  .set-username-fullname-box.login-box{
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+  }
+}

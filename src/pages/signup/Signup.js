@@ -116,7 +116,7 @@ const Signup = () => {
                 <input
                   type="text"
                   placeholder='Username'
-                  aria-label='Enter your full name'
+                  aria-label='Enter your username'
                   aria-required='true'
                   autoComplete='off'
                   name='username'

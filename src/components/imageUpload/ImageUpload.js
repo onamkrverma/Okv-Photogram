@@ -110,7 +110,7 @@ const ImageUpload = () => {
           {loading && <Loading />}
         </div>
 
-        <p>Image upload {progress} % completed</p>
+        <p>Upload {progress}% completed</p>
         {message &&<div>
            <p>{message}</p>
         </div>}

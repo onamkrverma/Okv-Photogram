@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { FaFacebookSquare } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../components/footer/Footer'
 import Loading from '../../components/loading/Loading'
@@ -6,11 +7,13 @@ import firebaseContex from '../../context/FirebaseContex'
 import './Login.css'
 
 const Login = () => {
-  const { login } = useContext(firebaseContex)
+  const { login, facebookLogin, } = useContext(firebaseContex)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-const localUser = JSON.parse(localStorage.getItem('authUser'))
+
+
+  const localUser = JSON.parse(localStorage.getItem('authUser'))
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate()
@@ -18,36 +21,45 @@ const localUser = JSON.parse(localStorage.getItem('authUser'))
 
   const invalid = (password.length < 6) || email === '';
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
     try {
       const loginUser = await login(email, password);
-      localStorage.setItem('authUser',JSON.stringify(loginUser.user))
-      // console.log('loginuser',loginUser )
+      localStorage.setItem('authUser', JSON.stringify(loginUser.user))
       setLoading(false)
       navigate('/')
 
     } catch (error) {
       e.target.reset();
       setLoading(false)
-        setErrorMessage(error.message.replace('Firebase:',''));
-        setTimeout(() => {
-          setErrorMessage('')
-        }, 5000);
+      setErrorMessage(error.message.replace('Firebase:', ''));
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 5000);
     }
 
   }
-
-  
 
   useEffect(() => {
     if (localUser) {
       navigate('/')
     }
   }, [localUser])
+
+
+  const handleFacebookLogin = async () => {
+    try {
+      const facebookLoginUser = await facebookLogin();
+      localStorage.setItem('authUser', JSON.stringify(facebookLoginUser.user))
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
 
   return (
@@ -104,12 +116,27 @@ const localUser = JSON.parse(localStorage.getItem('authUser'))
                 >
                   Log In
                 </button>
-                {loading && <Loading/>}
-                
+                {loading && <Loading />}
+
               </div>
             </form>
             {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
           </div>
+          <div className='seprator'>OR</div>
+          <div className="facebook-login-wrapper">
+            <button
+              type='button'
+              onClick={handleFacebookLogin}
+              className='facebook-login-btn login-button cur-point align-center'
+            >
+              <span className="facebook-icon">
+                <FaFacebookSquare style={{ width: '100%', height: '100%' }} />
+              </span>
+              Login with facebook
+            </button>
+          </div>
+
+
         </div>
         <div className="redirect-box login-box">
           <div className="redirect-text">
@@ -125,15 +152,17 @@ const localUser = JSON.parse(localStorage.getItem('authUser'))
             Create new account or login as a guest
           </div>
           <div className="guest-login-credential">
-          <div className="guest-email">
-            <p>Email: guest@gmail.com</p>
-          </div>
-          <div className="guest-password">
-            <p>Password: guest@1234</p>
-          </div></div>
+            <div className="guest-email">
+              <p>Email: guest@gmail.com</p>
+            </div>
+            <div className="guest-password">
+              <p>Password: guest@1234</p>
+            </div></div>
         </div>
       </div>
-      <Footer/>
+
+
+      <Footer />
     </div>
 
   )
