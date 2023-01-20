@@ -18,7 +18,7 @@ const UserInfoModel = () => {
  
   const [errorMessage, setErrorMessage] = useState('');
 
-const invalid = username === '' 
+const invalid = username === '' || fullName === '';
 
   const handleClick = async () => {
     try {
@@ -62,7 +62,7 @@ const invalid = username === ''
         <div className="set-username-fullname-wrapper">
           <div className="set-username-fullname-box login-box ">
             <div className="model-title">
-              Update Username and FullName !
+              Update FullName and Username !
             </div>
            
             <div className="input-label">

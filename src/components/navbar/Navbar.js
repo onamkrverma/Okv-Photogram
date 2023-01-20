@@ -10,9 +10,9 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout()
-    navigate('/login')
+  const handleLogout = async() => {
+    await logout();
+    navigate('/login');
   }
 
 
