@@ -9,7 +9,7 @@ import Loading from '../loading/Loading';
 
 const UserInfoModel = () => {
   const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
+  // const [fullName, setFullName] = useState('');
   const [isModel, setIsModel] = useState(true);
   const [loading, setLoading] = useState(false)
 
@@ -17,7 +17,7 @@ const UserInfoModel = () => {
   const localUser = JSON.parse(localStorage.getItem('authUser'));
   const [errorMessage, setErrorMessage] = useState('');
 
-const invalid = username === '' || fullName === '';
+const invalid = username === '' 
 
   const handleClick = async () => {
     try {
@@ -34,7 +34,7 @@ const invalid = username === '' || fullName === '';
           {
             userId: localUser.uid,
             email: localUser.email,
-            fullName,
+            fullName: localUser.displayName,
             username: username.toLowerCase(),
             dateCreated: new Date()
           }
@@ -61,20 +61,9 @@ const invalid = username === '' || fullName === '';
         <div className="set-username-fullname-wrapper">
           <div className="set-username-fullname-box login-box ">
             <div className="model-title">
-              Missing Details! Please Update Below Details
+              Set Username!
             </div>
-            <div className="input-label">
-              <input
-                type="text"
-                placeholder='FullName'
-                aria-label='Enter your full name'
-                aria-required='true'
-                autoComplete='off'
-                name='fullName'
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullName}
-              />
-            </div>
+           
             <div className="input-label">
               <input
                 type="text"

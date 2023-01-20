@@ -43,12 +43,6 @@ const Login = () => {
 
   }
 
-  useEffect(() => {
-    if (localUser) {
-      navigate('/')
-    }
-  }, [localUser])
-
 
   const handleFacebookLogin = async () => {
     try {
@@ -57,8 +51,20 @@ const Login = () => {
       navigate('/')
     } catch (error) {
       console.log(error)
+      setErrorMessage(error.message)
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 5000);
     }
   }
+
+  useEffect(() => {
+    if (localUser) {
+      navigate('/')
+    }
+  }, [localUser])
+
+
 
 
 
