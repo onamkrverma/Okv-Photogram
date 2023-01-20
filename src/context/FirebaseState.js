@@ -35,7 +35,6 @@ const FirebaseState = ({ children }) => {
   const facebookLogin = () => {
     const provider = new FacebookAuthProvider();
     return signInWithPopup(auth, provider);
-    
     }
 
 

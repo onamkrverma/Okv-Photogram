@@ -7,7 +7,7 @@ import firebaseContex from '../../context/FirebaseContex'
 import './Login.css'
 
 const Login = () => {
-  const { login, facebookLogin, } = useContext(firebaseContex)
+  const { login, facebookLogin } = useContext(firebaseContex)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -44,14 +44,14 @@ const Login = () => {
   }
 
 
-  const handleFacebookLogin = async () => {
+  const handleFacebookLogin = async() => {
     try {
       const facebookLoginUser = await facebookLogin();
-      localStorage.setItem('authUser', JSON.stringify(facebookLoginUser.user))
-      navigate('/')
+      localStorage.setItem('authUser', JSON.stringify(facebookLoginUser.user));
+      navigate('/');
     } catch (error) {
       console.log(error)
-      setErrorMessage(error.message)
+      setErrorMessage(error.message.replace('Firebase:', ''))
       setTimeout(() => {
         setErrorMessage('')
       }, 5000);

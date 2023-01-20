@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import './UserInfoModel.css'
 import '../../pages/login/Login.css'
 import { updateProfile } from 'firebase/auth';
@@ -7,14 +7,15 @@ import usernameChecker from '../../pages/signup/UsernameCheker';
 import { doc, setDoc } from 'firebase/firestore';
 import Loading from '../loading/Loading';
 
-const UserInfoModel = () => {
+const UserInfoModel = () => { 
+  const localUser = JSON.parse(localStorage.getItem('authUser'));
   const [username, setUsername] = useState('');
-  // const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState(localUser.displayName);
   const [isModel, setIsModel] = useState(true);
   const [loading, setLoading] = useState(false)
 
 
-  const localUser = JSON.parse(localStorage.getItem('authUser'));
+ 
   const [errorMessage, setErrorMessage] = useState('');
 
 const invalid = username === '' 
@@ -34,7 +35,7 @@ const invalid = username === ''
           {
             userId: localUser.uid,
             email: localUser.email,
-            fullName: localUser.displayName,
+            fullName,
             username: username.toLowerCase(),
             dateCreated: new Date()
           }
@@ -61,9 +62,21 @@ const invalid = username === ''
         <div className="set-username-fullname-wrapper">
           <div className="set-username-fullname-box login-box ">
             <div className="model-title">
-              Set Username!
+              Update Username and FullName !
             </div>
            
+            <div className="input-label">
+              <input
+                type="text"
+                placeholder='FullName'
+                aria-label='Enter your fullname'
+                aria-required='true'
+                autoComplete='off'
+                name='fullName'
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+              />
+            </div>
             <div className="input-label">
               <input
                 type="text"
