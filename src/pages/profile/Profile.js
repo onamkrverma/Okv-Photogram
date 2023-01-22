@@ -8,35 +8,81 @@ import ExploreCardSkeleton from '../explore/ExploreCardSkeleton'
 import './Profile.css'
 import '../explore/Explore.css'
 import ProfileSkeleton from './ProfileSkeleton'
-import { collection, onSnapshot, query, where } from 'firebase/firestore'
-import { db } from '../../config/FirebaseConfig'
+import { arrayRemove, arrayUnion, collection, doc, onSnapshot, query, updateDoc, where } from 'firebase/firestore'
+import { auth, db } from '../../config/FirebaseConfig'
+import { useParams } from 'react-router-dom'
+import SearchBox from '../../components/searchBox/SearchBox'
+import Loading from '../../components/loading/Loading'
 
 
 const Profile = () => {
-  const { allUsers, loading ,setLoading} = useContext(firebaseContex);
+  const { allUsers, loading, setLoading } = useContext(firebaseContex);
   const localUser = JSON.parse(localStorage.getItem('authUser'))
   const [currentUserPosts, setCurrentUserPosts] = useState([]);
+  const [loadingSpinner, setLoadingSpinner] = useState(false)
 
-   // get current user's posts
-   const getCurrentUserPosts = ()=>{
-    const postRef = collection(db,"posts");
-    const q = query(postRef,where('username','==',localUser.displayName));
-    
+  // get username form param
+  const { username } = useParams();
+
+
+  // get current user's posts
+  const getCurrentUserPosts = () => {
+    const postRef = collection(db, "posts");
+    const q = query(postRef, where('username', '==', username));
+
     onSnapshot(q, (querySnapshot) => {
       setCurrentUserPosts(querySnapshot.docs);
       setLoading(false);
-   });
+    });
+  }
+  // get and check userinfo from param
+  const allUsersData = allUsers.map((user) => user.data())
+  const currentUserInfo = allUsersData.filter((val) => (val?.username) === (username));
+
+  // get localUser Data 
+  const localUserData = allUsersData.filter((val) => {
+    return (localUser?.uid) === (val.userId);
+  })
+
+  // to check username present in localuser following list
+  const isFollowing = localUserData.map((data) => data.following)[0]?.filter((val) => val?.username === username)
+
+  const handleClick = async (username, userId) => {
+    setLoadingSpinner(true)
+    if (!isFollowing.length) {
+      await updateDoc(doc(db, 'userinfo', auth.currentUser.uid), {
+        following: arrayUnion({
+          username,
+        })
+      });
+      await updateDoc(doc(db, 'userinfo', userId), {
+        follower: arrayUnion({
+          username: auth.currentUser.displayName,
+        })
+      });
+
+    }
+    else {
+      await updateDoc(doc(db, 'userinfo', auth.currentUser.uid), {
+        following: arrayRemove({
+          username,
+        })
+      });
+      await updateDoc(doc(db, 'userinfo', userId), {
+        follower: arrayRemove({
+          username: auth.currentUser.displayName,
+        })
+      });
+    }
+    setLoadingSpinner(false)
   }
 
 
-  const currentUserInfo = allUsers.filter((val) => {
-    return (localUser?.uid) === (val.id);
-  })
+
 
   useEffect(() => {
     getCurrentUserPosts()
-  }, [])
-  
+  }, [username])
 
 
   return (
@@ -50,6 +96,7 @@ const Profile = () => {
       </div>
       <Navbar />
       <ImageUpload />
+      <SearchBox />
 
 
       <div className="profile-page-container">
@@ -57,33 +104,57 @@ const Profile = () => {
           loading ? <ProfileSkeleton />
             :
             currentUserInfo.map((currentUser) =>
-              <div className="profile-datails-wrapper absolute-center" key={currentUser.id}>
-                <div className="profile-image-wrapper">
-                  <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user-profile" />
+              <div className="profile-datails-section" key={currentUser.userId}>
+                <div className="profile-image-details-wrapper absolute-center ">
+                  <div className="profile-image-wrapper">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user-profile" />
+                  </div>
+
+                  <div className="profile-details-wrapper" >
+                    <div className="profile-username-follow-wrapper ">
+                      <div className="profile-username">
+                        {currentUser.username}
+                      </div>
+                      {(localUserData[0].username !== currentUser.username) &&
+                        <div className="profile-follow-unfollow-btn-wrapper">
+                          <button
+                            type='button'
+                            className='profile-follow-unfollow-btn cur-point'
+                            onClick={() => handleClick(currentUser.username, currentUser.userId)}
+                            style={{ background: (isFollowing.length) ? '#efefef' : '', color: (isFollowing.length) ? 'black' : '' }}
+                          >
+                            {!isFollowing.length ? 'Follow' : 'Unfollow'}
+                          </button>
+                          {loadingSpinner && <Loading />}
+                        </div>
+
+                      }
+                    </div>
+                    <div className="posts-followers-details-wrapper absolute-center">
+                      <div className="total-posts-wrapper total-wrapper absolute-center">
+                        <span className='font-w-500 total-number'>{currentUserPosts.length}</span>
+                        Post
+                      </div>
+                      <div className="total-followers-wrapper total-wrapper absolute-center">
+                        <span className='font-w-500 total-number'>{currentUser.follower?.length}</span>
+                        followers
+                      </div>
+                      <div className="total-following-wrapper total-wrapper absolute-center">
+                        <span className='font-w-500 total-number'>{currentUser.following?.length}</span>
+                        following
+                      </div>
+                    </div>
+                    <div className="profile-fullname-wrapper font-w-500">
+                      {currentUser.fullName}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="profile-details-wrapper" >
-                  <div className="profile-username-wrapper">
-                    {currentUser.data().username}
+                <div className="mobile-screen">
+                  <div className="profile-fullname-wrapper font-w-500">
+                    {currentUser.fullName}
                   </div>
-                  <div className="posts-followers-details-wrapper absolute-center">
-                    <div className="total-posts-wrapper total-wrapper">
-                      {currentUserPosts.length} Post
-                    </div>
-                    <div className="total-followers-wrapper total-wrapper">
-                      N/A followers
-                    </div>
-                    <div className="total-following-wrapper total-wrapper">
-                      N/A following
-                    </div>
-
-                  </div>
-                  <div className="profile-fullname-wrapper">
-                    {currentUser.data().fullName}
-                  </div>
-
                 </div>
-
               </div>
             )
 

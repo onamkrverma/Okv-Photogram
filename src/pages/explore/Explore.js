@@ -4,6 +4,7 @@ import { FiHeart } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Navbar from '../../components/navbar/Navbar'
+import SearchBox from '../../components/searchBox/SearchBox'
 import firebaseContex from '../../context/FirebaseContex'
 import './Explore.css'
 import ExploreCardSkeleton from './ExploreCardSkeleton'
@@ -31,6 +32,7 @@ const Explore = () => {
       </div>
       <Navbar />
       <ImageUpload />
+      <SearchBox/>
 
 
       <div className="explore-section">

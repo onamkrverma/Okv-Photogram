@@ -99,7 +99,7 @@
   .navbar-container{
     bottom: -1px;
     z-index: 7;
-    width: 100%;
+    width: 100% !important;
     height: 50px;
     top: unset;
     padding: 0;

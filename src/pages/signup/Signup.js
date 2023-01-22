@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import './Signup.css'
 import { Link, useNavigate } from 'react-router-dom'
 import firebaseContex from '../../context/FirebaseContex'
-import { db, auth} from '../../config/FirebaseConfig'
+import { db, auth } from '../../config/FirebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 import usernameChecker from './UsernameCheker'
 import { updateProfile } from 'firebase/auth'
@@ -30,20 +30,22 @@ const Signup = () => {
     if (!usernameList.length) {
       try {
         const createUser = await signup(email, password);
-        await updateProfile(auth.currentUser,{
+        await updateProfile(auth.currentUser, {
           displayName: username
         });
-        localStorage.setItem('authUser',JSON.stringify(createUser.user))
+        localStorage.setItem('authUser', JSON.stringify(createUser.user))
         // add userinfo to firebase database
-        
+
         const userRef = doc(db, 'userinfo', createUser.user.uid)
-        
+
         await setDoc(userRef,
           {
             userId: createUser.user.uid,
             email: email.toLowerCase(),
             fullName,
             username: username.toLowerCase(),
+            follower: [],
+            following: [],
             dateCreated: new Date()
           }
         )
@@ -54,11 +56,11 @@ const Signup = () => {
         console.log(error)
         e.target.reset();
         setLoading(false)
-        setErrorMessage(error.message.replace('Firebase:',''));
+        setErrorMessage(error.message.replace('Firebase:', ''));
         setTimeout(() => {
           setErrorMessage('')
         }, 5000);
-        
+
       }
     }
     else {
@@ -67,7 +69,7 @@ const Signup = () => {
       setTimeout(() => {
         setErrorMessage('')
       }, 3000);
-      
+
     }
 
 
@@ -145,7 +147,7 @@ const Signup = () => {
                   style={{ opacity: (invalid || loading) && '0.5' }}
                 >Sign Up
                 </button>
-                {loading && <Loading/>}
+                {loading && <Loading />}
               </div>
 
             </form>
@@ -162,7 +164,7 @@ const Signup = () => {
 
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
 
   )

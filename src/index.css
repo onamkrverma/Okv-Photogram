@@ -8,7 +8,12 @@
 }
 
 body{
-  background-color: #fafafa
+  background-color: #fafafa;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+  height: 0px;
 }
 
 /* common classes */
@@ -24,6 +29,9 @@ body{
 }
 .cur-point{
   cursor: pointer;
+}
+.hide-content{
+  display: none;
 }
 .errorMessage{
   color: red;

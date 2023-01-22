@@ -9,6 +9,8 @@ import firebaseContex from '../../context/FirebaseContex';
 import './Home.css'
 import { RxCross2 } from 'react-icons/rx';
 import UserInfoModel from '../../components/userInfoModel/UserInfoModel';
+import RightNavbar from '../../components/rightNavbar/RightNavbar';
+import SearchBox from '../../components/searchBox/SearchBox';
 
 
 const Home = () => {
@@ -25,8 +27,6 @@ const Home = () => {
     }
   }, [localUser])
 
-
-
   const suggestedUsers = allUsers.filter((val) => {
     return (localUser?.uid) !== (val.id);
   })
@@ -36,100 +36,47 @@ const Home = () => {
   })
 
 
-
-
-return (
-  <div className='home-page-container'>
-    <div className="top-instagram-logo">
-      <img
-        src="/images/Instagram_logo.svg"
-        alt="instagram logo"
-        className='instagram-logo'
-      />
-    </div>
-    <Navbar />
-    <div className='story-post-wrapper'>
-      <Story />
-      <div className="post-conatiner">
-        {loading ? <PostCardSkeleton />
-          :
-          posts.map((post) =>
-            <PostCard key={post.id} post={post.data()} postId={post.id} setAlertMessage={setAlertMessage} />
-          )
-        }
+  return (
+    <div className='home-page-container'>
+      <div className="top-instagram-logo">
+        <img
+          src="/images/Instagram_logo.svg"
+          alt="instagram logo"
+          className='instagram-logo'
+        />
       </div>
-    </div>
-
-    <ImageUpload />
-
-    <div className='userprofile-suggestion-wrapper'>
-      <div className="userprofile-wrapper">
-        <div className="userprofile-image-wrapper">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-            alt="user-profile"
-          />
-        </div>
-
-        {currentUserInfo.map((currentUser) =>
-          <div className="username-fullname-wrapper" key={currentUser.id}>
-            <div className="username-wrapper">
-              {currentUser.data().username}
-            </div>
-            <div className="fullname-wrapper" >
-              {currentUser.data().fullName}
-            </div>
-          </div>
-
-        )}
-
-      </div>
-
-      <div className="suggestion-wrapper">
-        <div className="suggestion-title">
-          Suggestions For You
-        </div>
-        <div className="suggestion-user-list">
-          {
-            suggestedUsers.slice(0, 5).map((users) =>
-              <div className="userprofile-wrapper" key={users.id}>
-                <div className="userprofile-image-wrapper">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                    alt="user-profile"
-                  />
-                </div>
-                <div className="username-fullname-wrapper">
-                  <div className="username-wrapper">
-                    {users.data().username}
-                  </div>
-                  <div className="fullname-wrapper">
-                    {users.data().fullName}
-                  </div>
-                </div>
-              </div>
+      <Navbar />
+      <div className='story-post-wrapper'>
+        <Story />
+        <div className="post-conatiner">
+          {loading ? <PostCardSkeleton />
+            :
+            posts.map((post) =>
+              <PostCard key={post.id} post={post.data()} postId={post.id} setAlertMessage={setAlertMessage} />
             )
           }
-
         </div>
       </div>
 
-    </div>
+      <ImageUpload />
+      <SearchBox/>
 
-    <div className="alert-box" style={{ display: !alertMessage && 'none' }}>
-      <div className="alert-message-wrapper">
-        {alertMessage}
-      </div>
-      <div className="alert-cancle-icon align-center cur-point" onClick={() => setAlertMessage('')}>
-        <RxCross2 style={{ width: '100%', height: '100%' }} />
-      </div>
-    </div>
+      <RightNavbar currentUserInfo={currentUserInfo} suggestedUsers={suggestedUsers} localUser={localUser}/>
 
-    {loading ? '': (!currentUserInfo.length && <UserInfoModel/>)}
-    
-    
-  </div>
-)
+      <div className="alert-box" style={{ display: !alertMessage && 'none' }}>
+        <div className="alert-message-wrapper">
+          {alertMessage}
+        </div>
+        <div className="alert-cancle-icon align-center cur-point" onClick={() => setAlertMessage('')}>
+          <RxCross2 style={{ width: '100%', height: '100%' }} />
+        </div>
+      </div>
+
+      {loading ? '' : (!currentUserInfo.length && <UserInfoModel />)}
+
+
+    </div>
+  )
 }
 
 export default Home

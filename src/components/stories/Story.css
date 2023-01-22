@@ -37,9 +37,6 @@
 
 }
 
-::-webkit-scrollbar{
-  height: 0px;
-}
 
 /* responsive for mobile */
 @media (max-width:426px){

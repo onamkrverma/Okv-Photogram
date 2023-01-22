@@ -3,19 +3,16 @@ import './PostCard.css';
 import { FiHeart, FiSend, FiSmile } from 'react-icons/fi';
 import { FaRegComment } from 'react-icons/fa';
 import { updateDoc, arrayUnion, doc, arrayRemove } from "firebase/firestore";
-import { db } from '../../config/FirebaseConfig';
+import { db ,auth} from '../../config/FirebaseConfig';
 
 
 const PostCard = ({ post, postId, setAlertMessage }) => {
   const [likesCount, setLikesCount] = useState(post.likes);
   const [comments, setComments] = useState('');
   const [isClick, setIsClick] = useState(false);
-  const localUser = JSON.parse(localStorage.getItem('authUser'));
 
   const invalid = (comments === '');
-
-  const isLiked = (post.likes).filter((value) => (localUser.displayName) === (value.username))
-
+  const isLiked = (post.likes).filter((value) => (auth.currentUser.displayName) === (value.username))
 
   const handleLikes = async () => {
     setIsClick(true);
@@ -25,7 +22,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
         setLikesCount(likesCount - 1)
         await updateDoc(doc(db, 'posts', postId), {
           likes: arrayRemove({
-            username: localUser.displayName,
+            username: auth.currentUser.displayName,
           }),
         });
 
@@ -36,7 +33,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
         setLikesCount(likesCount + 1)
         await updateDoc(doc(db, 'posts', postId), {
           likes: arrayUnion({
-            username: localUser.displayName,
+            username: auth.currentUser.displayName,
           }),
         });
       }
@@ -57,7 +54,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
       await updateDoc(doc(db, 'posts', postId), {
 
         comments: arrayUnion({
-          username: localUser.displayName,
+          username: auth.currentUser.displayName,
           comment: comments
         })
       });

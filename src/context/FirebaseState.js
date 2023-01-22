@@ -18,6 +18,8 @@ const FirebaseState = ({ children }) => {
 
   // for toggle upload model
   const [isUpload, setIsUpload] = useState(false);
+  // for toggle search model
+  const [isSearch, setIsSearch] = useState(false);
   // for loading
   const [loading, setLoading] = useState(true)
 
@@ -104,7 +106,7 @@ const FirebaseState = ({ children }) => {
       <firebaseContex.Provider
         value={{ signup, login, logout, user, posts, 
         allUsers, isUpload, setIsUpload, loading, setLoading, 
-        facebookLogin }}>
+        facebookLogin,isSearch, setIsSearch }}>
         {children}
       </firebaseContex.Provider>
     )

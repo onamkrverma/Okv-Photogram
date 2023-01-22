@@ -9,7 +9,7 @@ import firebaseContex from '../../context/FirebaseContex';
 
 
 const ImageUpload = () => {
-  const { isUpload,setIsUpload } = useContext(firebaseContex);
+  const { isUpload, setIsUpload } = useContext(firebaseContex);
 
 
   const [image, setImage] = useState('');
@@ -68,7 +68,7 @@ const ImageUpload = () => {
         }
       );
     }
-    
+
 
   }
 
@@ -76,57 +76,57 @@ const ImageUpload = () => {
   return (
     <div className="upload-model-container absolute-center" style={{ display: isUpload ? 'flex' : 'none' }} >
 
-    <div className="image-upload-container absolute-center" >
+      <div className="image-upload-container absolute-center" >
 
-      <div className='image-upload-wrapper' >
+        <div className='image-upload-wrapper' >
 
-        <textarea
-          type="text"
-          placeholder='Enter captions'
-          className='caption-textarea'
-          onChange={(e) => setCaption(e.target.value)}
-          value={caption}
-        />
-        <input type="file"
-          title='select image'
-          placeholder='select image'
-          onChange={(e) => setImage(e.target.files[0])}
-          accept="image/*"
-          className='image-select-input'
-          ref={imageRef}
-        />
+          <textarea
+            type="text"
+            placeholder='Enter captions'
+            className='caption-textarea'
+            onChange={(e) => setCaption(e.target.value)}
+            value={caption}
+          />
+          <input type="file"
+            title='select image'
+            placeholder='select image'
+            onChange={(e) => setImage(e.target.files[0])}
+            accept="image/*"
+            className='image-select-input'
+            ref={imageRef}
+          />
 
-        <div className="button-wrapper">
-          <button
-            type='button'
-            title='upload'
-            onClick={handleUpload}
-            disabled={!image}
-            className='upload-btn  cur-point'
-            style={{ opacity: (!image || loading) && '0.5' }}
-          >
-            Upload
-          </button>
-          {loading && <Loading />}
+          <div className="button-wrapper">
+            <button
+              type='button'
+              title='upload'
+              onClick={handleUpload}
+              disabled={!image}
+              className='upload-btn  cur-point'
+              style={{ opacity: (!image || loading) && '0.5' }}
+            >
+              Upload
+            </button>
+            {loading && <Loading />}
+          </div>
+
+          <p>Upload {progress}% completed</p>
+          {message && <div>
+            <p>{message}</p>
+          </div>}
+
         </div>
 
-        <p>Upload {progress}% completed</p>
-        {message &&<div>
-           <p>{message}</p>
-        </div>}
-
       </div>
-
+      <button
+        type='button'
+        title='cancel button'
+        className='cancel-btn cur-point'
+        onClick={() => setIsUpload(false)}
+      >
+        <RxCross2 style={{ height: '100%', width: '100%' }} />
+      </button>
     </div>
-    <button
-          type='button'
-          title='cancel button'
-          className='cancel-btn cur-point'
-          onClick={() => setIsUpload(false)}
-        >
-          <RxCross2 style={{ height: '100%', width: '100%' }} />
-        </button>
-      </div>
   )
 }
 

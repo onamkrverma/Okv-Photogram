@@ -1,0 +1,24 @@
+.userprofile-follow-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.suggestion-user-list .userprofile-image-wrapper {
+  width: 30px;
+}
+
+.follow-unfollow-btn {
+  border: none;
+  background: none;
+  color: var(--primary-btn-bg);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.follow-unfollow-btn-wrapper {
+  position: relative;
+}
+.follow-unfollow-btn-wrapper .loading-spinner-wrapper {
+  width: 30px;
+}

@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
-import './Navbar.css'
-import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox, MdOutlineMenu } from 'react-icons/md'
-import { NavLink, useNavigate } from 'react-router-dom'
-import firebaseContex from '../../context/FirebaseContex'
+import React, { useContext, useState } from 'react';
+import './Navbar.css';
+import { MdHomeFilled, MdOutlineExplore, MdOutlineAddBox, MdOutlineMenu } from 'react-icons/md';
+import {GrSearch} from 'react-icons/gr';
+import { NavLink, useNavigate } from 'react-router-dom';
+import firebaseContex from '../../context/FirebaseContex';
+import { auth } from '../../config/FirebaseConfig';
 
 const Navbar = () => {
-  const { logout, isUpload, setIsUpload } = useContext(firebaseContex);
+  const { logout, isUpload, setIsUpload,isSearch, setIsSearch } = useContext(firebaseContex);
   const [isMenuMore, setIsMenuMore] = useState(false)
 
   const navigate = useNavigate();
@@ -17,13 +19,14 @@ const Navbar = () => {
 
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-container" style={{width:isSearch && '80px'}}>
       <div className="navbar-wrapper">
-        <div className="logo-wrapper">
+        <div className="logo-wrapper" style={{textAlign:isSearch && 'center'}}>
           <img
-            src="/images/Instagram_logo.svg"
+            src={`${isSearch?'/images/Instagram-logo.png':'/images/Instagram_logo.svg'} `}
             alt="instagram logo"
             className='instagram-logo'
+            style={{width: isSearch && '40px',height:isSearch && '40px'}}
           />
         </div>
         <div className="nav-menu-wrapper">
@@ -32,18 +35,35 @@ const Navbar = () => {
               <div className="icon absolute-center">
                 <MdHomeFilled style={{ width: '100%', height: '100%' }} />
               </div>
-              <div className="menu-title">
+              <div className={`menu-title ${isSearch && 'hide-content'}`} >
                 Home
               </div>
             </NavLink>
 
           </div>
+          <div className='search-menu-wrapper menu-wrapper'>
+            <button
+              type='button'
+              className='create-btn cur-point'
+              title='search user'
+              onClick={() => setIsSearch(!isSearch)}
+            >
+              <div className="icon absolute-center">
+                <GrSearch style={{ width: '100%', height: '100%' }} />
+              </div>
+              <div className={`menu-title ${isSearch && 'hide-content'}`} >
+                Search
+              </div>
+            </button>
+          </div>
+
+
           <div className='explore-menu-wrapper menu-wrapper'>
             <NavLink to='/explore' className={({ isActive }) => isActive ? 'active-link align-center' : 'align-center'}>
               <div className="icon absolute-center">
                 <MdOutlineExplore style={{ width: '100%', height: '100%' }} />
               </div>
-              <div className="menu-title">
+              <div className={`menu-title ${isSearch && 'hide-content'}`} >
                 Explore
               </div>
             </NavLink>
@@ -58,17 +78,17 @@ const Navbar = () => {
               <div className="icon absolute-center">
                 <MdOutlineAddBox style={{ width: '100%', height: '100%' }} />
               </div>
-              <div className="menu-title">
+              <div className={`menu-title ${isSearch && 'hide-content'}`} >
                 Create
               </div>
             </button>
           </div>
           <div className="profile-menu-wrapper menu-wrapper">
-          <NavLink to='/profile' className={({ isActive }) => isActive ? 'active-link align-center' : 'align-center'}>
+          <NavLink to={`/profile/${auth.currentUser?.displayName}`} className={({ isActive }) => isActive ? 'active-link align-center' : 'align-center'}>
             <div className="user-image-wrapper absolute-center icon">
               <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user-profile" />
             </div>
-            <div className="menu-title">
+            <div className={`menu-title ${isSearch && 'hide-content'}`} >
               Profile
             </div>
             </NavLink>
@@ -83,7 +103,7 @@ const Navbar = () => {
               <div className=" icon">
                 <MdOutlineMenu style={{ width: '100%', height: '100%' }} />
               </div>
-              <div className="menu-title">
+              <div className={`menu-title ${isSearch && 'hide-content'}`} >
                 More
               </div>
             </button>
@@ -100,7 +120,6 @@ const Navbar = () => {
 
 
           </div>
-
         </div>
       </div>
     </div>

@@ -14,58 +14,6 @@
 }
 
 
-.userprofile-suggestion-wrapper {
-  width: 100%;
-  max-width: 300px;
-  position: absolute;
-  right: 2%;
-  top: 65px;
-}
-
-.userprofile-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.userprofile-image-wrapper {
-  width: 50px;
-}
-
-.userprofile-image-wrapper img {
-  width: 100%;
-  height: 100%;
-}
-
-.username-fullname-wrapper .username-wrapper {
-  font-size: 14px;
-  width: auto;
-}
-
-.username-fullname-wrapper {
-  margin-left: 15px;
-}
-
-.fullname-wrapper {
-  font-size: 14px;
-  color: var(--secondary-text);
-  font-weight: 400;
-}
-
-.suggestion-wrapper,
-.suggestion-user-list {
-  margin-top: 15px;
-}
-
-.suggestion-title {
-  color: var(--secondary-text);
-  font-weight: 500;
-}
-
-.suggestion-user-list .userprofile-image-wrapper {
-  width: 30px;
-}
-
  .alert-box {
   display: flex;
   align-items: center;
