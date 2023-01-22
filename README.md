@@ -9,9 +9,10 @@
  - Fully responsive
  
  #### Upcoming features to be add 
- - Follow and Unfollow
+ - Follow and Unfollow (✅ done)
  - User profile page (✅ done)
  - Facebook login (✅ done)
+ - Search users by username (✅ done)
  - many more..
  
 ## Technology used 
