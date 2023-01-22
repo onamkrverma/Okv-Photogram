@@ -14,7 +14,7 @@ const SearchBox = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username).includes(searchQuery));
+    const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username).includes(searchQuery.toLowerCase()));
     setResults(filterUsername)
 
     if (!results.length) {
