@@ -26,7 +26,7 @@ const invalid = username === '' || fullName === '';
       const usernameList = await usernameChecker(username)
       if (!usernameList.length) {
         await updateProfile(auth.currentUser, {
-          displayName: username
+          displayName: username.toLowerCase()
         });
 
         // add userinfo to firebase database

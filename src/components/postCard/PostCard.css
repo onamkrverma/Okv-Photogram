@@ -23,7 +23,9 @@
   height: 100%;
   object-fit: cover;
 }
-
+.card-header a{
+  text-decoration: none;
+}
 .profile-username {
   margin-left: 15px;
   font-weight: 600;
@@ -31,6 +33,9 @@
   color: var(--primary-text);
 }
 
+ .card-header .profile-username:hover{
+  color: var(--secondary-text);
+}
 .post-wrapper {
   width: 100%;
   position: relative;

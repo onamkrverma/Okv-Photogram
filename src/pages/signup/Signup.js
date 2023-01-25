@@ -21,7 +21,7 @@ const Signup = () => {
 
   const navigate = useNavigate()
 
-  const invalid = (password.length < 6) || email === '';
+  const invalid = (password.length < 6) || email === '' || fullName===''|| username ==='';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const Signup = () => {
       try {
         const createUser = await signup(email, password);
         await updateProfile(auth.currentUser, {
-          displayName: username
+          displayName: username.toLowerCase()
         });
         localStorage.setItem('authUser', JSON.stringify(createUser.user))
         // add userinfo to firebase database
