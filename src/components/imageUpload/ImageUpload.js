@@ -21,7 +21,6 @@ const ImageUpload = () => {
 
 
   const handleUpload = () => {
-
     if (image) {
       setLoading(true)
       const storageRef = ref(storage, `/images/${image.name}`);
@@ -42,7 +41,7 @@ const ImageUpload = () => {
         async () => {
           // download url
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
-          console.log(downloadURL);
+          // console.log(downloadURL);
           // add image url to database
 
           await addDoc(collection(db, 'posts'),
@@ -60,17 +59,30 @@ const ImageUpload = () => {
 
           setCaption('')
           imageRef.current.value = ''
+          setImage('')
           setProgress(0);
           setLoading(false);
           setMessage('Image Upload Successfully');
+          setTimeout(() => {
+            setMessage('')
+          }, 5000);
 
 
         }
       );
     }
 
-
   }
+
+  const handleClose = () => {
+    setCaption('')
+    setImage('')
+    imageRef.current.value = ''
+    setProgress(0);
+    setMessage('')
+    setIsUpload(false)
+  }
+
 
 
   return (
@@ -82,7 +94,7 @@ const ImageUpload = () => {
 
           <textarea
             type="text"
-            placeholder='Enter captions'
+            placeholder='Enter captions (optional)'
             className='caption-textarea'
             onChange={(e) => setCaption(e.target.value)}
             value={caption}
@@ -110,7 +122,7 @@ const ImageUpload = () => {
             {loading && <Loading />}
           </div>
 
-          <p>Upload {progress}% completed</p>
+          {progress > 0 && <p>Upload {progress}% completed</p>}
           {message && <div>
             <p>{message}</p>
           </div>}
@@ -122,7 +134,7 @@ const ImageUpload = () => {
         type='button'
         title='cancel button'
         className='cancel-btn cur-point'
-        onClick={() => setIsUpload(false)}
+        onClick={handleClose}
       >
         <RxCross2 style={{ height: '100%', width: '100%' }} />
       </button>

@@ -7,8 +7,8 @@ import './SuggestionList.css'
 
 const SuggestionList = ({users,usersId}) => {
   const [loading, setLoading] = useState(false);
-  const isFollower = (users.follower).filter((value)=>value?.username === auth.currentUser.displayName);
-  
+  const isFollower = (users.follower).filter((value)=>(value?.username) === (auth.currentUser.displayName));
+
 
   const handleClick = async(username,userId)=>{
    setLoading(true)

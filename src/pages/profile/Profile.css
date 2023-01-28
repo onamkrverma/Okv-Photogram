@@ -107,4 +107,7 @@ position: relative;
     display: flex;
     margin-top: 10px;
   }
+  .posts-list-container{
+    margin-bottom: 65px;
+  }
  }

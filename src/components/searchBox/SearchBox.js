@@ -8,24 +8,14 @@ import { useNavigate } from 'react-router-dom';
 const SearchBox = () => {
   const { isSearch, setIsSearch, allUsers } = useContext(firebaseContex);
   const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [resultMessage, setResultMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username).includes(searchQuery.toLowerCase()));
-    setResults(filterUsername)
-
-    if (!results.length) {
-      setResultMessage('No result found')
-    }
-
-  }
+  const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username).includes(searchQuery.toLowerCase()));
 
   const handleRedirect = (username) => {
     navigate(`/profile/${username}`)
     setIsSearch(false)
+    setSearchQuery('')
   }
 
   return (
@@ -42,7 +32,6 @@ const SearchBox = () => {
         >
           <RxCross2 style={{ height: '100%', width: '100%' }} />
         </button>
-        <form onSubmit={handleSearch}>
           <div className="search-input ">
             <input
               type="text"
@@ -65,15 +54,15 @@ const SearchBox = () => {
           <div className="search-btn-wrapper" style={{ display: 'none' }}>
             <button type='submit'></button>
           </div>
-        </form>
+        
         <div className="line-seperator"></div>
         <div className="search-results-wrapper">
           <div className="result-title search-title">
             Results
           </div>
           <div className="search-results">
-            {
-              results.map((users) =>
+            { searchQuery &&
+              filterUsername.map((users) =>
                 <div className="search-userprofile-follow-wrapper cur-point" key={users.userId} onClick={() => handleRedirect(users.username)}>
                   <div className="userprofile-wrapper">
                     <div className="userprofile-image-wrapper">
@@ -95,7 +84,7 @@ const SearchBox = () => {
               )
 
             }
-            {!results.length && <div>{resultMessage}</div>}
+            {!filterUsername.length && <div>No user found</div>}
 
           </div>
         </div>

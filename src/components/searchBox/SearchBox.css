@@ -68,8 +68,8 @@
   height: 350px;
 }
 
-.search-results .userprofile-follow-wrapper:hover {
-  background: var(--primary-bg);
+.search-results .search-userprofile-follow-wrapper:hover {
+  background: #f4f4f4;
   border-radius: 25px;
 }
 
