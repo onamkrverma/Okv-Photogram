@@ -46,3 +46,23 @@
   color: var(--secondary-text);
   font-weight: 500;
 }
+
+
+@media (min-width:426px) and (max-width:769px) {
+  .fullname-wrapper {
+    text-overflow: ellipsis;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+/* responsive for large screen */
+
+@media (min-width:768px) and (max-width:1024px) {
+
+  .userprofile-suggestion-wrapper {
+    max-width: fit-content;
+  }
+
+}

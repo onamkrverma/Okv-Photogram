@@ -37,79 +37,76 @@ const FirebaseState = ({ children }) => {
   const facebookLogin = () => {
     const provider = new FacebookAuthProvider();
     return signInWithPopup(auth, provider);
-    }
-
-
-    const logout = () => {
-      localStorage.removeItem('authUser')
-      setUser(null)
-      return signOut(auth);
-    }
-
-
-    // get all posts order by posted date 
-    const getAllPosts = () => {
-      const postRef = collection(db, "posts");
-      const q = query(postRef, orderBy("datePostedOn", "desc"));
-
-      onSnapshot(q, (querySnapshot) => {
-        setPosts(querySnapshot.docs);
-        setLoading(false);
-      });
-
-    }
-
-    // get all users info
-    const getAllUsers = () => {
-      const q = query(collection(db, "userinfo"));
-
-      onSnapshot(q, (querySnapshot) => {
-        setAllUsers(querySnapshot.docs);
-        setLoading(false)
-      })
-    }
-
-
-
-
-
-    useEffect(() => {
-      const unsubscribe = () => onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-          localStorage.setItem('authUser', JSON.stringify(currentUser))
-        }
-        else {
-          localStorage.removeItem('authUser')
-          setUser(null);
-        }
-
-      });
-      return () => {
-        unsubscribe()
-      }
-
-    }, [])
-
-    useEffect(() => {
-      getAllPosts();
-      getAllUsers();
-
-    }, [])
-
-
-
-
-
-
-
-    return (
-      <firebaseContex.Provider
-        value={{ signup, login, logout, user, posts, 
-        allUsers, isUpload, setIsUpload, loading, setLoading, 
-        facebookLogin,isSearch, setIsSearch }}>
-        {children}
-      </firebaseContex.Provider>
-    )
   }
 
-  export default FirebaseState
+
+  const logout = () => {
+    localStorage.removeItem('authUser')
+    setUser(null)
+    return signOut(auth);
+  }
+
+
+  // get all posts order by posted date 
+  const getAllPosts = () => {
+    const postRef = collection(db, "posts");
+    const q = query(postRef, orderBy("datePostedOn", "desc"));
+
+    onSnapshot(q, (querySnapshot) => {
+      setPosts(querySnapshot.docs);
+      setLoading(false);
+    });
+
+  }
+
+  // get all users info
+  const getAllUsers = () => {
+    const q = query(collection(db, "userinfo"));
+
+    onSnapshot(q, (querySnapshot) => {
+      setAllUsers(querySnapshot.docs);
+      setLoading(false)
+    })
+  }
+
+
+
+
+  useEffect(() => {
+    const unsubscribe = () => onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        localStorage.setItem('authUser', JSON.stringify(currentUser))
+      }
+      else {
+        localStorage.removeItem('authUser')
+        setUser(null);
+      }
+
+    });
+    return () => {
+      unsubscribe()
+    }
+
+  }, [])
+
+  useEffect(() => {
+    getAllPosts();
+    getAllUsers();
+
+  }, [])
+
+
+
+  return (
+    <firebaseContex.Provider
+      value={{
+        signup, login, logout, user, posts,
+        allUsers, isUpload, setIsUpload, loading, setLoading,
+        facebookLogin, isSearch, setIsSearch
+      }}>
+      {children}
+    </firebaseContex.Provider>
+  )
+}
+
+export default FirebaseState

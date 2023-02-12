@@ -1,0 +1,17 @@
+.signup-confirm-email-wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.confirm-email-image-wrapper{
+  width: 80%;
+  height: auto;
+}
+.confirm-email-image{
+  width: 100%;
+  height: 100%;
+}
+.confirm-email-message {
+  width: 80%;
+}

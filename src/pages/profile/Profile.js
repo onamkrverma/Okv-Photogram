@@ -113,7 +113,7 @@ const Profile = () => {
                   <div className="profile-details-wrapper" >
                     <div className="profile-username-follow-wrapper ">
                       <div className="profile-username">
-                        {currentUser.username}
+                        {currentUser?.username}
                       </div>
                       {(localUserData[0].username !== currentUser.username) &&
                         <div className="profile-follow-unfollow-btn-wrapper">

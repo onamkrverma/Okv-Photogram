@@ -10,7 +10,7 @@ import Loading from '../loading/Loading';
 const UserInfoModel = () => { 
   const localUser = JSON.parse(localStorage.getItem('authUser'));
   const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState(localUser.displayName);
+  const [fullName, setFullName] = useState(localUser?.displayName);
   const [isModel, setIsModel] = useState(true);
   const [loading, setLoading] = useState(false)
 
@@ -26,7 +26,7 @@ const invalid = username === '' || fullName === '';
       const usernameList = await usernameChecker(username)
       if (!usernameList.length) {
         await updateProfile(auth.currentUser, {
-          displayName: username.toLowerCase()
+          displayName: username.toLowerCase().trim()
         });
 
         // add userinfo to firebase database
@@ -35,8 +35,11 @@ const invalid = username === '' || fullName === '';
           {
             userId: localUser.uid,
             email: localUser.email,
-            fullName,
-            username: username.toLowerCase(),
+            fullName: fullName.trim(),
+            username: username.toLowerCase().trim(),
+            follower: [],
+            following: [],
+            authProvider: 'Facebook',
             dateCreated: new Date()
           }
         )
@@ -87,6 +90,7 @@ const invalid = username === '' || fullName === '';
                 name='username'
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
+                onKeyDown={(e)=> e.code === 'Space' && e.preventDefault()}
               />
             </div>
             <div className="button-wrapper">

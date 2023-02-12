@@ -7,9 +7,9 @@ import './SuggestionList.css'
 
 const SuggestionList = ({users,usersId}) => {
   const [loading, setLoading] = useState(false);
-  const isFollower = (users.follower).filter((value)=>(value?.username) === (auth.currentUser.displayName));
+  const isFollower = (users.follower)?.filter((value)=>(value?.username) === (auth.currentUser.displayName));
 
-
+  
   const handleClick = async(username,userId)=>{
    setLoading(true)
     if(!isFollower.length){
@@ -64,7 +64,7 @@ const SuggestionList = ({users,usersId}) => {
           className='follow-unfollow-btn cur-point'
           onClick={() => handleClick(users.username, usersId)}
         >
-          {isFollower.length?'Unfollow':'Follow'}
+          {isFollower?.length?'Unfollow':'Follow'}
         </button>
         {loading && <Loading/>}
       </div>

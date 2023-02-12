@@ -10,7 +10,7 @@ const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username).includes(searchQuery.toLowerCase()));
+  const filterUsername = allUsers.map((user) => user.data()).filter((val) => (val?.username)?.includes(searchQuery.toLowerCase()));
 
   const handleRedirect = (username) => {
     navigate(`/profile/${username}`)

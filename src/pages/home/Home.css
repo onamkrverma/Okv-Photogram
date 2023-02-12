@@ -54,13 +54,9 @@
 
 /* responsive for large screen */
 
-@media (min-width:426px) and (max-width:1024px){
+@media (min-width:768px) and (max-width:1024px){
   .story-post-wrapper{
     max-width: 370px;
   }
-  .userprofile-suggestion-wrapper{
-    max-width: fit-content;
-  }
-
   
 }

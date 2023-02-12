@@ -13,8 +13,8 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = async() => {
-    await logout();
     navigate('/login');
+    await logout();
   }
 
 
