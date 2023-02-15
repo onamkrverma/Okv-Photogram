@@ -39,7 +39,7 @@ const invalid = username === '' || fullName === '';
             username: username.toLowerCase().trim(),
             follower: [],
             following: [],
-            authProvider: 'Facebook',
+            authProvider: 'Facebook or userinfoModel',
             dateCreated: new Date()
           }
         )

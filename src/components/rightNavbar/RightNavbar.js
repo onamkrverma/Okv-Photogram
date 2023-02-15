@@ -1,9 +1,13 @@
 import React from 'react'
+import Footer from '../footer/Footer';
 import './RightNavbar.css';
 import SuggestionList from './suggestionList/SuggestionList';
 
 const RightNavbar = ({currentUserInfo,suggestedUsers}) => {
   
+  const shuffleArr = suggestedUsers.sort(()=>0.5-Math.random());
+  
+
   return (
     <div className='rightNavbar-section'>
       <div className='userprofile-suggestion-wrapper'>
@@ -35,14 +39,15 @@ const RightNavbar = ({currentUserInfo,suggestedUsers}) => {
           </div>
           <div className="suggestion-user-list">
             {
-              suggestedUsers.slice(0, 5).map((users) =>
+              shuffleArr.slice(0, 5).map((users) =>
                <SuggestionList users={users.data()} key={users.id} usersId={users.id} />
               )
             }
 
           </div>
+          <Footer/>
         </div>
-
+          
       </div>
     </div>
   )
