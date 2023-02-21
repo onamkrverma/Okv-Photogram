@@ -1,5 +1,12 @@
 # Instagram clone 
  - This instagram clone is built with React js and Firebase v9
+ 
+ ## Screenshots
+
+ <div align="center">
+   <img height="400" src="https://user-images.githubusercontent.com/106578262/220271137-cf9653ab-0b31-43e3-8b75-47d4227258db.png"/>
+ </div>
+
 
 ## Features of this clone 
  - Login and signup with email-password authentication
