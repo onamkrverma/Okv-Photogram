@@ -1,18 +1,30 @@
 # Instagram clone 
  - This instagram clone is built with React js and Firebase v9
+ 
+ ## Screenshots
+
+ <div align="center">
+   <img height="400" src="https://user-images.githubusercontent.com/106578262/220271137-cf9653ab-0b31-43e3-8b75-47d4227258db.png"/>
+ </div>
+
 
 ## Features of this clone 
- - User can login and signup with email-password authentication or login with facebook
- - User can post a image with caption
- - User can do like and comments on any post
+ - Login and signup with email-password authentication
+ - Post a image with caption
+ - Like/dislike, comments and share any post
  - Multipage layout (home and explore page)
  - Fully responsive
+ - Follow and Unfollow 
+ - User profile page 
+ - Facebook login 
+ - Search users by username
+ - Click on username to view that profile
+ - Email verification
+ - show random users in suggestionlist
+ 
  
  #### Upcoming features to be add 
- - Follow and Unfollow (✅ done)
- - User profile page (✅ done)
- - Facebook login (✅ done)
- - Search users by username (✅ done)
+ - display follower and following list
  - many more..
  
 ## Technology used 
