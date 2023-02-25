@@ -22,12 +22,17 @@ const Navbar = () => {
     <div className="navbar-container" style={{width:isSearch && '80px'}}>
       <div className="navbar-wrapper">
         <div className="logo-wrapper" style={{textAlign:isSearch && 'center'}}>
-          <img
-            src={`${isSearch?'/images/Instagram-logo.png':'/images/Instagram_logo.svg'} `}
+         {isSearch ? <img
+            src={'/images/photogram-logo.png'}
             alt="instagram logo"
-            className='instagram-logo'
+            className='photogram-logo'
             style={{width: isSearch && '40px',height:isSearch && '40px'}}
           />
+          :
+          <div className="photogram-logo" style={{width: isSearch && '40px',height:isSearch && '40px'}}>
+            Okv Photogram
+          </div>
+          }
         </div>
         <div className="nav-menu-wrapper">
           <div className='home-menu-wrapper  menu-wrapper'>

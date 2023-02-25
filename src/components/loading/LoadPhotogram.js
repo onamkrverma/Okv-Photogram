@@ -1,14 +1,14 @@
 import React from 'react';
-import './LoadInstagram.css';
+import './LoadPhotogram.css';
 
-const LoadInstagram = () => {
+const LoadPhotogram = () => {
   return (
     <div className='load-instagram-container absolute-center'>
       <div className="load-instagram-image-wrapper">
-        <img src="/images/Instagram-logo.png" alt="instagram logo" />
+        <img src="/images/photogram-logo.png" alt="photogram logo" />
       </div>
     </div>
   )
 }
 
-export default LoadInstagram
+export default LoadPhotogram

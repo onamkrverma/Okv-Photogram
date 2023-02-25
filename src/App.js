@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter,Routes,Route} from "react-router-dom";
 import FirebaseState from "./context/FirebaseState";
-import LoadInstagram from "./components/loading/LoadInstagram";
+import LoadPhotogram from "./components/loading/LoadPhotogram";
 
 
 const Login = lazy(()=> import ('./pages/login/Login'));
@@ -16,7 +16,7 @@ function App() {
     <>
     <FirebaseState>
     <BrowserRouter>
-    <Suspense fallback={<LoadInstagram/> }>
+    <Suspense fallback={<LoadPhotogram/> }>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>

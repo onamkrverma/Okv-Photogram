@@ -42,10 +42,7 @@
   margin: 36px 0 12px 0;
 }
 
-.instagram-logo {
-  height: 55px;
-  width: 154px;
-}
+
 
 
 .login-form-wrapper {
@@ -148,7 +145,7 @@
     display: none;
   }
 
-  .logo-wrapper .instagram-logo {
+  .logo-wrapper .photogram-logo{
     height: 70px;
     width: 200px;
   }

@@ -38,12 +38,10 @@ const Home = () => {
 
   return (
     <div className='home-page-container'>
-      <div className="top-instagram-logo">
-        <img
-          src="/images/Instagram_logo.svg"
-          alt="instagram logo"
-          className='instagram-logo'
-        />
+      <div className="top-photogram-logo">
+        <div className="photogram-logo">
+          Okv Photogram
+        </div>
       </div>
       <Navbar />
       <div className='story-post-wrapper'>
@@ -59,9 +57,9 @@ const Home = () => {
       </div>
 
       <ImageUpload />
-      <SearchBox/>
+      <SearchBox />
 
-      <RightNavbar currentUserInfo={currentUserInfo} suggestedUsers={suggestedUsers} localUser={localUser}/>
+      <RightNavbar currentUserInfo={currentUserInfo} suggestedUsers={suggestedUsers} localUser={localUser} />
 
       <div className="alert-box" style={{ display: !alertMessage && 'none' }}>
         <div className="alert-message-wrapper">

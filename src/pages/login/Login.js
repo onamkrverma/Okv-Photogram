@@ -101,72 +101,70 @@ const Login = () => {
       <div className="login-wrapper">
         <div className="login-box">
           <div className="logo-wrapper">
-            <img
-              src="/images/Instagram_logo.svg"
-              alt="instagram logo"
-              className='instagram-logo'
-            />
+            <div className="photogram-logo">
+              Okv Photogram
+            </div>
           </div>
           {!isEmailSend ?
-          
-          <div className="login-form-wrapper">
-            <form className='login-form' onSubmit={handleSubmit}>
-              <div className="input-label">
-                <input
-                  type="email"
-                  placeholder='Email address'
-                  aria-label='Enter your email address'
-                  aria-required='true'
-                  autoComplete='off'
-                  name='email'
-                  onChange={(e) => setEmail(e.target.value)}
 
+            <div className="login-form-wrapper">
+              <form className='login-form' onSubmit={handleSubmit}>
+                <div className="input-label">
+                  <input
+                    type="email"
+                    placeholder='Email address'
+                    aria-label='Enter your email address'
+                    aria-required='true'
+                    autoComplete='off'
+                    name='email'
+                    onChange={(e) => setEmail(e.target.value)}
+
+                  />
+                </div>
+                <div className="input-label">
+                  <input
+                    type="password"
+                    placeholder='Password'
+                    aria-label='Enter your password'
+                    aria-required='true'
+                    autoComplete='off'
+                    name='password'
+                    onChange={(e) => setPassword(e.target.value)}
+
+                  />
+                </div>
+
+                <div className="button-wrapper ">
+                  <button
+                    disabled={invalid}
+                    type='submit'
+                    className='login-button cur-point'
+                    style={{ opacity: (invalid || loading) && '0.5' }}
+                  >
+                    Log In
+                  </button>
+                  {loading && <Loading />}
+
+                </div>
+              </form>
+              {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+            </div>
+            :
+            // email send confirmation
+            <div className="signup-confirm-email-wrapper">
+              <div className="confirm-email-image-wrapper">
+                <img
+                  src="/images/confirm-email.svg"
+                  alt="confirm-email"
+                  className='confirm-email-image'
                 />
               </div>
-              <div className="input-label">
-                <input
-                  type="password"
-                  placeholder='Password'
-                  aria-label='Enter your password'
-                  aria-required='true'
-                  autoComplete='off'
-                  name='password'
-                  onChange={(e) => setPassword(e.target.value)}
-
-                />
+              <div className='confirm-email-message'>
+                Your Email not Verified yet, So Please verify email first.
+                Varification link send to your email (check inbox or spam folder).
               </div>
 
-              <div className="button-wrapper ">
-                <button
-                  disabled={invalid}
-                  type='submit'
-                  className='login-button cur-point'
-                  style={{ opacity: (invalid || loading) && '0.5' }}
-                >
-                  Log In
-                </button>
-                {loading && <Loading />}
-
-              </div>
-            </form>
-            {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
-          </div>
-          :
-          // email send confirmation
-          <div className="signup-confirm-email-wrapper">
-            <div className="confirm-email-image-wrapper">
-              <img
-                src="/images/confirm-email.svg"
-                alt="confirm-email"
-                className='confirm-email-image'
-              />
             </div>
-            <div className='confirm-email-message'>
-              Your Email not Verified yet, So Please verify email first.
-              Varification link send to your email (check inbox or spam folder).
-            </div>
-
-          </div>
           }
           <div className='seprator'>OR</div>
           <div className="facebook-login-wrapper">
@@ -181,8 +179,8 @@ const Login = () => {
               Login with facebook
             </button>
           </div>
-            
-          
+
+
         </div>
         <div className="redirect-box login-box">
           <div className="redirect-text">
@@ -193,8 +191,8 @@ const Login = () => {
           </div>
 
         </div>
-        <div className="guest-login-info-wrapper login-box" 
-        style={{display:'none'}}>
+        <div className="guest-login-info-wrapper login-box"
+          style={{ display: 'none' }}>
           <div className="title">
             Create new account or login as a guest
           </div>

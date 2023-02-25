@@ -47,7 +47,7 @@ const Signup = () => {
             clearInterval(interval);
 
             localStorage.setItem('authUser', JSON.stringify(createUser.user))
-            
+
             // add userinfo to firebase database
             const userRef = doc(db, 'userinfo', createUser.user.uid)
             await setDoc(userRef,
@@ -96,11 +96,9 @@ const Signup = () => {
       <div className="login-wrapper">
         <div className="login-box">
           <div className="logo-wrapper">
-            <img
-              src="/images/Instagram_logo.svg"
-              alt="instagram logo"
-              className='instagram-logo'
-            />
+            <div className="photogram-logo">
+              Okv Photogram
+            </div>
           </div>
 
           {!isEmailSend ?
@@ -182,7 +180,7 @@ const Signup = () => {
                 />
               </div>
               <div className='confirm-email-message'>
-                Verification link send to your email (check inbox or spam folder). 
+                Verification link send to your email (check inbox or spam folder).
                 Please verify email first.
               </div>
 

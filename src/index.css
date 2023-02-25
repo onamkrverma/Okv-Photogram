@@ -7,6 +7,13 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+@font-face {
+  font-family: 'photogram-fonts';
+  src:  url('../public/myFonts/myFont.woff2') format('woff2'),
+        url('../public/myFonts/myFont.woff2') format('woff');
+}
+
+
 body{
   background-color: #fafafa;
   scroll-behavior: smooth;
@@ -36,13 +43,18 @@ body{
 .errorMessage{
   color: red;
 }
-.top-instagram-logo {
+.top-photogram-logo {
   display: none;
+}
+.photogram-logo{
+  font-size: 40px;
+  font-family: 'photogram-fonts';
+  height: 50px;
 }
 
  /* responsive code for mobile */
 @media (max-width:426px) {
-  .top-instagram-logo {
+  .top-photogram-logo {
     display: flex;
     height: fit-content;
     align-items: center;
@@ -51,8 +63,5 @@ body{
     padding: 5px 0 0px 5px;
   }
 
-  .top-instagram-logo .instagram-logo {
-    height: 50px;
-    width: 140px;
-  }
+  
 }

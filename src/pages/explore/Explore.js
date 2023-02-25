@@ -23,12 +23,10 @@ const Explore = () => {
 
   return (
     <div className='explore-page-container'>
-      <div className="top-instagram-logo">
-        <img
-          src="/images/Instagram_logo.svg"
-          alt="instagram logo"
-          className='instagram-logo'
-        />
+      <div className="top-photogram-logo">
+        <div className="photogram-logo">
+          Okv Photogram
+        </div>
       </div>
       <Navbar />
       <ImageUpload />
