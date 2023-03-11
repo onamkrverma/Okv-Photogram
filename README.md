@@ -3,9 +3,8 @@
  
  ## Screenshots
 
- <div align="center">
-   <img height="400" src="https://user-images.githubusercontent.com/106578262/220271137-cf9653ab-0b31-43e3-8b75-47d4227258db.png"/>
- </div>
+   ![Okv-photogram](https://user-images.githubusercontent.com/106578262/220271137-cf9653ab-0b31-43e3-8b75-47d4227258db.png)
+ 
 
 
 ## Features of this clone 
