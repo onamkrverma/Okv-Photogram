@@ -23,7 +23,7 @@
   height: 100%;
   object-fit: cover;
 }
-.card-header a{
+.card-header a {
   text-decoration: none;
 }
 .profile-username {
@@ -33,7 +33,7 @@
   color: var(--primary-text);
 }
 
- .card-header .profile-username:hover{
+.card-header .profile-username:hover {
   color: var(--secondary-text);
 }
 .post-wrapper {
@@ -58,19 +58,19 @@
   padding: 10px;
 }
 
-.like-btn{
+.like-btn {
   border: none;
   background: none;
   width: 100%;
   height: 100%;
 }
 .like-icon,
-.comments-icon, .share-icon,
+.comments-icon,
+.share-icon,
 .smile-icon {
   width: 24px;
   height: 24px;
   margin-right: 10px;
-
 }
 .comments-icon svg {
   transform: rotateY(180deg);
@@ -84,7 +84,11 @@
   font-weight: 500;
   margin: 5px 0;
 }
-.username-caption-wrapper{
+.post-date-wrapper {
+  font-size: small;
+  color: gray;
+}
+.username-caption-wrapper {
   margin: 5px 0;
 }
 .caption-wrapper {
@@ -93,7 +97,6 @@
   color: var(--primary-text);
   width: 100%;
 }
-
 
 .post-comments-wrapper {
   border-top: 1px solid var(--border-color);
@@ -117,7 +120,7 @@
   background: inherit;
   font-size: 14px;
 }
-.comments-post-btn{
+.comments-post-btn {
   border: none;
   background: none;
   font-size: 15px;
@@ -126,9 +129,9 @@
 }
 
 /* responsive for mobile */
-@media (max-width:426px){
-  .card-container{
-    margin-top:0 ;
+@media (max-width: 426px) {
+  .card-container {
+    margin-top: 0;
     margin-bottom: 10px;
     border-radius: 0px;
   }
