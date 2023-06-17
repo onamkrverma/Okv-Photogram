@@ -89,15 +89,6 @@ const FirebaseState = ({ children }) => {
     });
   };
 
-  // useEffect(() => {
-  //   // filter out current user
-  //   const users = allUsers.filter((val) => {
-  //     return localUser?.uid !== val.id;
-  //   });
-  //   const shuffleUsers = users.sort(() => 0.5 - Math.random()).slice(0, 5);
-  //   setSuggestedUsers(shuffleUsers);
-  // }, [allUsers]);
-
   useEffect(() => {
     const unsubscribe = () =>
       onAuthStateChanged(auth, (currentUser) => {
