@@ -34,9 +34,6 @@
  - React loading skeleton
  - React icons
  
-### Deployement 
-  [![Netlify Status](https://api.netlify.com/api/v1/badges/0ac304c4-a7c5-4aeb-af7e-0115f09830e1/deploy-status)](https://okv-photogram.netlify.app/)
-
 ## Feedbacks
 ### Don't forget to :star: the repo
 
