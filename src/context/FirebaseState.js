@@ -77,6 +77,7 @@ const FirebaseState = ({ children }) => {
   // get random user for suggested user
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const getRandomUsers = () => {
+    if (!localUser) return;
     const q = query(
       collection(db, "userinfo"),
       where("username", "!=", localUser.displayName),
