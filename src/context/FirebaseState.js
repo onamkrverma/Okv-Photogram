@@ -11,6 +11,7 @@ import {
 import { auth } from "../config/FirebaseConfig";
 import {
   collection,
+  getCountFromServer,
   limit,
   onSnapshot,
   orderBy,
@@ -24,7 +25,8 @@ const FirebaseState = ({ children }) => {
   const [user, setUser] = useState(localUser);
   const [posts, setPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-
+  const [postLimit, setPostLimit] = useState(10);
+  const [postCount, setPostCount] = useState(null);
   // for toggle upload model
   const [isUpload, setIsUpload] = useState(false);
   // for toggle search model
@@ -53,15 +55,20 @@ const FirebaseState = ({ children }) => {
     return signOut(auth);
   };
 
-  // get all posts order by posted date
-  const getAllPosts = () => {
+  // get posts order by posted date
+  const getPostsByLimit = () => {
     const postRef = collection(db, "posts");
-    const q = query(postRef, orderBy("datePostedOn", "desc"));
-
+    const q = query(postRef, orderBy("datePostedOn", "desc"), limit(postLimit));
     onSnapshot(q, (querySnapshot) => {
       setPosts(querySnapshot.docs);
       setLoading(false);
     });
+  };
+  // get total post count
+  const getPostCount = async () => {
+    const coll = collection(db, "posts");
+    const snapshot = await getCountFromServer(coll);
+    setPostCount(snapshot.data().count);
   };
 
   // get all users info
@@ -106,7 +113,11 @@ const FirebaseState = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    getAllPosts();
+    getPostsByLimit();
+  }, [postLimit]);
+
+  useEffect(() => {
+    getPostCount();
     getAllUsers();
     getRandomUsers();
   }, []);
@@ -128,6 +139,9 @@ const FirebaseState = ({ children }) => {
         isSearch,
         setIsSearch,
         suggestedUsers,
+        setPostLimit,
+        postLimit,
+        postCount,
       }}
     >
       {children}

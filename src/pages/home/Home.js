@@ -13,12 +13,12 @@ import RightNavbar from "../../components/rightNavbar/RightNavbar";
 import SearchBox from "../../components/searchBox/SearchBox";
 
 const Home = () => {
-  const { posts, allUsers, loading } = useContext(firebaseContex);
+  const { posts, allUsers, loading, postLimit, setPostLimit, postCount } =
+    useContext(firebaseContex);
   const navigate = useNavigate();
   const [alertMessage, setAlertMessage] = useState("");
 
   const localUser = JSON.parse(localStorage.getItem("authUser"));
-
   useEffect(() => {
     if (localUser === null) {
       navigate("/login");
@@ -51,6 +51,18 @@ const Home = () => {
             ))
           )}
         </div>
+
+        {postLimit <= postCount ? (
+          <div className="absolute-center">
+            <button
+              type="button"
+              className="load-more-btn"
+              onClick={() => setPostLimit(postLimit + 10)}
+            >
+              Load more post
+            </button>
+          </div>
+        ) : null}
       </div>
 
       <ImageUpload />
