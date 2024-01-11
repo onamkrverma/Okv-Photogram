@@ -91,6 +91,10 @@
 .username-caption-wrapper {
   margin: 5px 0;
 }
+.comments-wrapper {
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
 .caption-wrapper {
   font-size: 14px;
   margin-left: 15px;

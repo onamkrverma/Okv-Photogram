@@ -11,7 +11,6 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
   const [comments, setComments] = useState("");
   const [isClick, setIsClick] = useState(false);
 
-  const invalid = comments === "";
   const isLiked = post.likes.filter(
     (value) => auth.currentUser.displayName === value.username
   );
@@ -152,10 +151,8 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
 
           {post.comments?.map((data, index) => (
             <div className="comments-display-section align-center" key={index}>
-              <div className="profile-username">{data.username}</div>
-              <div className="comments-wrapper caption-wrapper">
-                {data.comment}
-              </div>
+              <p className="profile-username">{data.username}</p>
+              <p className="comments-wrapper caption-wrapper">{data.comment}</p>
             </div>
           ))}
         </div>
@@ -169,14 +166,16 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
             placeholder="Add a comment"
             onChange={(e) => setComments(e.target.value)}
             value={comments ?? ""}
+            min={1}
+            maxLength={50}
           />
 
           <button
-            disabled={invalid}
+            disabled={comments.length <= 0}
             onClick={handlePostComments}
             type="button"
             className="comments-post-btn cur-point"
-            style={{ opacity: invalid && "0.5" }}
+            style={{ opacity: comments.length <= 0 && "0.5" }}
           >
             Post
           </button>
