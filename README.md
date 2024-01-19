@@ -1,5 +1,5 @@
-# Instagram clone 
- - This instagram clone is built with React js and Firebase v9
+# Okv Photogram
+ - Okv photogram is a web app that mimics Instagram's features using React.js and Firebase v9 (Baas). It lets user share their photos, comment and like others' posts. User can also browse and follow other users' profiles.
  
  ## Screenshots
 
@@ -20,6 +20,7 @@
  - Click on username to view that profile
  - Email verification
  - show random users in suggestionlist
+ - Add infinite scrolling untill all post load
  
  
  #### Upcoming features to be add 
