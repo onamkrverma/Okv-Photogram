@@ -1,4 +1,4 @@
-.navbar-container{
+.navbar-container {
   padding: 12px;
   width: 245px;
   height: 100vh;
@@ -10,41 +10,39 @@
   z-index: 2;
 }
 
-.navbar-wrapper{
+.navbar-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-
-.menu-wrapper{
+.menu-wrapper {
   display: flex;
   align-items: center;
-  padding: 12px ;
+  padding: 12px;
   margin: 4px 0;
 }
-.menu-wrapper:hover{
+.menu-wrapper:hover {
   background: var(--primary-bg);
   border-radius: 25px;
 }
 
-.icon{
+.icon {
   width: 30px;
   height: 30px;
 }
 
-.menu-title{
+.menu-title {
   padding-left: 16px;
   color: var(--primary-text);
 }
 
-.active-link{
+.active-link {
   font-weight: 700;
 }
 
-.menu-wrapper a{
+.menu-wrapper a {
   text-decoration: none;
   color: var(--primary-text);
-  
 }
 
 .create-btn {
@@ -54,21 +52,20 @@
   background: none;
   font-size: inherit;
 }
-.create-btn:focus{
+.create-btn:focus {
   font-weight: 700;
 }
 
-.user-image-wrapper img{
+.user-image-wrapper img {
   width: 100%;
   height: 100%;
 }
 
-.more-menu-wrapper{
+.more-menu-wrapper {
   position: relative;
-  
 }
 
-.more-menu-options-wrapper{
+.more-menu-options-wrapper {
   position: absolute;
   bottom: 55px;
   width: 100%;
@@ -82,7 +79,7 @@
   background: var(--primary-bg);
   width: 100%;
 }
-.logout-btn{
+.logout-btn {
   border: none;
   background: none;
   width: 100%;
@@ -92,27 +89,27 @@
 
 /* responsive for mobile */
 
-@media (max-width:426px){
-  .navbar-container{
+@media (max-width: 426px) {
+  .navbar-container {
     bottom: -1px;
     z-index: 7;
     width: 100% !important;
     height: 50px;
     top: unset;
     padding: 0;
-
   }
-  
-  .navbar-wrapper .logo-wrapper, .menu-title{
+
+  .navbar-wrapper .logo-wrapper,
+  .menu-title {
     display: none;
   }
-  .nav-menu-wrapper{
+  .nav-menu-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  .menu-wrapper{
-    padding:0 ;
+  .menu-wrapper {
+    padding: 0;
     margin: 0;
   }
   .more-menu-options-wrapper {
@@ -120,20 +117,20 @@
     width: 100px;
     bottom: 40px;
   }
-  .active-link, .create-btn:focus{
+  .active-link,
+  .create-btn:focus {
     border-top: 2px solid var(--primary-text);
   }
- 
-  .icon{
+
+  .icon {
     margin-top: 5px;
   }
 }
 
-/* responsive for large screen */
+/* responsive for tablet screen */
 
-@media (min-width:426px) and (max-width:769px){
-  .navbar-container{
-    width: auto;
+@media (min-width: 426px) and (max-width: 769px) {
+  .navbar-container {
+    width: 180px;
   }
-
 }

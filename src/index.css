@@ -64,6 +64,12 @@ body {
   cursor: pointer;
 }
 
+/* responsive code for tablet */
+@media (min-width: 426px) and (max-width: 769px) {
+  .photogram-logo {
+    font-size: 32px;
+  }
+}
 /* responsive code for mobile */
 @media (max-width: 426px) {
   .top-photogram-logo {

@@ -21,7 +21,6 @@
   height: 100%;
 }
 
-
 .username-fullname-wrapper .username-wrapper {
   font-size: 14px;
   width: auto;
@@ -47,22 +46,22 @@
   font-weight: 500;
 }
 
-
-@media (min-width:426px) and (max-width:769px) {
+@media (min-width: 426px) and (max-width: 769px) {
   .fullname-wrapper {
     text-overflow: ellipsis;
     width: 70px;
     white-space: nowrap;
     overflow: hidden;
   }
+  .userprofile-suggestion-wrapper {
+    right: 1%;
+  }
 }
 
 /* responsive for large screen */
 
-@media (min-width:768px) and (max-width:1024px) {
-
+@media (min-width: 768px) and (max-width: 1024px) {
   .userprofile-suggestion-wrapper {
     max-width: fit-content;
   }
-
 }
