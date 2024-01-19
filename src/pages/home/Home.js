@@ -11,6 +11,8 @@ import { RxCross2 } from "react-icons/rx";
 import UserInfoModel from "../../components/userInfoModel/UserInfoModel";
 import RightNavbar from "../../components/rightNavbar/RightNavbar";
 import SearchBox from "../../components/searchBox/SearchBox";
+import LoadingCircle from "../../components/loading/LoadingCircle";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 const Home = () => {
   const { posts, allUsers, loading, postLimit, setPostLimit, postCount } =
@@ -23,11 +25,30 @@ const Home = () => {
     if (localUser === null) {
       navigate("/login");
     }
+    // eslint-disable-next-line
   }, [localUser]);
 
   const currentUserInfo = allUsers.filter((val) => {
     return localUser?.uid === val.id;
   });
+
+  // infinite scroll custom hook
+  const infiniteScroll = useInfiniteScroll();
+
+  useEffect(() => {
+    const handleScroll = () =>
+      infiniteScroll({
+        postLimit,
+        postCount,
+        setPostLimit,
+        increaseLimitBy: 10,
+      });
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [postLimit, postCount, infiniteScroll, setPostLimit]);
 
   return (
     <div className="home-page-container">
@@ -52,17 +73,7 @@ const Home = () => {
           )}
         </div>
 
-        {postLimit <= postCount ? (
-          <div className="absolute-center">
-            <button
-              type="button"
-              className="load-more-btn"
-              onClick={() => setPostLimit(postLimit + 10)}
-            >
-              Load more post
-            </button>
-          </div>
-        ) : null}
+        {postLimit <= postCount ? <LoadingCircle /> : null}
       </div>
 
       <ImageUpload />

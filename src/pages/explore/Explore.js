@@ -8,6 +8,8 @@ import SearchBox from "../../components/searchBox/SearchBox";
 import firebaseContex from "../../context/FirebaseContex";
 import "./Explore.css";
 import ExploreCardSkeleton from "./ExploreCardSkeleton";
+import LoadingCircle from "../../components/loading/LoadingCircle";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 const Explore = () => {
   const { posts, loading, postCount, postLimit, setPostLimit } =
@@ -19,7 +21,26 @@ const Explore = () => {
     if (localUser === null) {
       navigate("/login");
     }
+    // eslint-disable-next-line
   }, [localUser]);
+
+  // infinite scroll custom hook
+  const infiniteScroll = useInfiniteScroll();
+
+  useEffect(() => {
+    const handleScroll = () =>
+      infiniteScroll({
+        postLimit,
+        postCount,
+        setPostLimit,
+        increaseLimitBy: 10,
+      });
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [postLimit, postCount, infiniteScroll, setPostLimit]);
 
   return (
     <div className="explore-page-container">
@@ -67,17 +88,7 @@ const Explore = () => {
           </>
         )}
       </div>
-      {postLimit <= postCount ? (
-        <div className="absolute-center">
-          <button
-            type="button"
-            className="load-more-btn"
-            onClick={() => setPostLimit(postLimit + 3)}
-          >
-            Load more
-          </button>
-        </div>
-      ) : null}
+      {postLimit <= postCount ? <LoadingCircle /> : null}
     </div>
   );
 };

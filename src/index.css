@@ -52,18 +52,6 @@ body {
   height: 50px;
 }
 
-.load-more-btn {
-  margin: 15px 0;
-  border: none;
-  background: var(--primary-btn-bg);
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
 /* responsive code for tablet */
 @media (min-width: 426px) and (max-width: 769px) {
   .photogram-logo {
