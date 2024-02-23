@@ -10,8 +10,8 @@
 
 @font-face {
   font-family: "photogram-fonts";
-  src: url("../public/myFonts/myFont.woff2") format("woff2"),
-    url("../public/myFonts/myFont.woff2") format("woff");
+  src: url("/myFonts/myFont.woff2") format("woff2"),
+    url("/myFonts/myFont.woff2") format("woff");
 }
 
 body {

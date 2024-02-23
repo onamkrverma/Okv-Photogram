@@ -17,19 +17,12 @@ import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 const Home = () => {
   const { posts, allUsers, loading, postLimit, setPostLimit, postCount } =
     useContext(firebaseContex);
-  const navigate = useNavigate();
   const [alertMessage, setAlertMessage] = useState("");
 
-  const localUser = JSON.parse(localStorage.getItem("authUser"));
-  useEffect(() => {
-    if (localUser === null) {
-      navigate("/login");
-    }
-    // eslint-disable-next-line
-  }, [localUser]);
+  const authUser = JSON.parse(localStorage.getItem("authUser"));
 
   const currentUserInfo = allUsers.filter((val) => {
-    return localUser?.uid === val.id;
+    return authUser?.uid === val.id;
   });
 
   // infinite scroll custom hook
