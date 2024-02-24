@@ -26,6 +26,10 @@
  #### Upcoming features to be add 
  - display follower and following list
  - many more..
+
+## Note: 
+- Now this project is migrated from CRA to Vite + React app
+
  
 ## Technology used 
  - React js
@@ -39,17 +43,20 @@
 ### Don't forget to :star: the repo
 
 
+ 
 
-## Getting Started with Create React App
- - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started with Vite React App
+ - This project is bootstrapped with [Create Vite + React App](https://github.com/vitejs/vite/tree/main/packages/create-vite).
  - clone down this repositery. You will need to `node.js` and `git` installed globally on your machine.
 
 
 ## installation and setup instructions
 1. installation: `npm install`
-2. In the project directory, you can run: `npm start`
+2. In the project directory, you can run: `npm run dev`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+The page will reload when you make changes.
+
+## Queries
+If you have any query or suggestion, feel free to [create an issue](https://github.com/onamkrverma/Okv-Photogram/issues)
