@@ -65,9 +65,9 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
 
   const handleShare = async (username, caption) => {
     const shareData = {
-      title: "Instagram Clone",
-      text: `One amazing post is posted by ${username} with caption ${caption} follow link to view`,
-      url: document.location.href,
+      title: "Okv Photogram",
+      text: `One amazing post is posted by "${username}" with caption: "${caption}", visit given link to view`,
+      url: window.location.href,
     };
     try {
       await navigator.share(shareData);
@@ -142,7 +142,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
           </div>
           <div className="like-count-wrapper ">{post.likes.length} Likes</div>
           <div className="post-date-wrapper">
-            {post.datePostedOn.toDate().toDateString()}
+            {post.datePostedOn?.toDate()?.toDateString()}
           </div>
           <div className="username-caption-wrapper align-center ">
             <div className="profile-username">{post.username}</div>

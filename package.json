@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@jsquash/jpeg": "^1.4.0",
+    "@jsquash/png": "^3.0.0",
+    "@jsquash/resize": "^1.1.1",
+    "@jsquash/webp": "^1.4.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
