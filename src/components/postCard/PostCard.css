@@ -49,13 +49,16 @@
 .large-like-icon {
   display: none;
   position: absolute;
-  width: 90px;
-  height: 90px;
+  width: 130px;
+  height: 130px;
 }
 
 .card-bottom {
   border-top: 1px solid var(--border-color);
   padding: 10px;
+}
+.post-like-comments-wrapper {
+  gap: 15px;
 }
 
 .like-btn {
@@ -68,9 +71,8 @@
 .comments-icon,
 .share-icon,
 .smile-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
+  width: 30px;
+  height: 30px;
 }
 .comments-icon svg {
   transform: rotateY(180deg);
@@ -79,7 +81,6 @@
   margin: 0;
   white-space: nowrap;
 }
-
 .like-count-wrapper {
   font-weight: 500;
   margin: 5px 0;
@@ -124,6 +125,11 @@
   background: inherit;
   font-size: 14px;
 }
+
+.post-comments-wrapper:focus-within {
+  box-shadow: 0 0 5px 1px var(--primary-btn-bg);
+}
+
 .comments-post-btn {
   border: none;
   background: none;
