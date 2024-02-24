@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./PostCard.css";
-import { FiHeart, FiSend, FiSmile } from "react-icons/fi";
-import { FaRegComment } from "react-icons/fa";
 import { updateDoc, arrayUnion, doc, arrayRemove } from "firebase/firestore";
 import { db, auth } from "../../config/FirebaseConfig";
 import { Link } from "react-router-dom";
+import {
+  HiOutlineFaceSmile,
+  HiOutlineChatBubbleOvalLeft,
+  HiOutlinePaperAirplane,
+  HiHeart,
+} from "react-icons/hi2";
 
 const PostCard = ({ post, postId, setAlertMessage }) => {
   const [likesCount, setLikesCount] = useState(post.likes);
   const [comments, setComments] = useState("");
   const [isClick, setIsClick] = useState(false);
-
+  const inputRef = useRef(null);
   const isLiked = post.likes.filter(
     (value) => auth.currentUser.displayName === value.username
   );
@@ -44,6 +48,10 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
     setTimeout(() => {
       setIsClick(false);
     }, 1000);
+  };
+
+  const handleCommentClick = () => {
+    inputRef.current.focus();
   };
 
   const handlePostComments = async () => {
@@ -100,12 +108,11 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
             className="large-like-icon"
             style={{ display: isClick ? "block" : "none" }}
           >
-            <FiHeart
+            <HiHeart
+              fill="red"
               style={{
                 width: "100%",
                 height: "100%",
-                fill: "red",
-                color: "red",
               }}
             />
           </div>
@@ -119,25 +126,33 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
                 onClick={handleLikes}
                 className="like-btn cur-point"
               >
-                <FiHeart
+                <HiHeart
+                  fill={isLiked.length > 0 ? "red" : "none"}
+                  strokeWidth={isLiked.length > 0 ? "0" : "1.5"}
                   style={{
                     width: "100%",
                     height: "100%",
-                    fill: isLiked.length > 0 && "red",
-                    color: isLiked.length > 0 && "red",
                   }}
                 />
               </button>
             </div>
 
-            <div className="comments-icon absolute-center">
-              <FaRegComment style={{ width: "100%", height: "100%" }} />
+            <div
+              className="comments-icon absolute-center cur-point"
+              onClick={handleCommentClick}
+            >
+              <HiOutlineChatBubbleOvalLeft
+                style={{ width: "100%", height: "100%" }}
+              />
             </div>
             <div
               className="share-icon absolute-center cur-point"
               onClick={() => handleShare(post.username, post.caption)}
             >
-              <FiSend style={{ width: "100%", height: "100%" }} />
+              <HiOutlinePaperAirplane
+                transform="rotate(-40 0 0)"
+                style={{ width: "100%", height: "100%" }}
+              />
             </div>
           </div>
           <div className="like-count-wrapper ">{post.likes.length} Likes</div>
@@ -158,7 +173,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
         </div>
         <div className="post-comments-wrapper align-center">
           <div className="smile-icon">
-            <FiSmile style={{ width: "100%", height: "100%" }} />
+            <HiOutlineFaceSmile style={{ width: "100%", height: "100%" }} />
           </div>
           <input
             type="text"
@@ -166,6 +181,7 @@ const PostCard = ({ post, postId, setAlertMessage }) => {
             placeholder="Add a comment"
             onChange={(e) => setComments(e.target.value)}
             value={comments ?? ""}
+            ref={inputRef}
             min={1}
             maxLength={50}
           />
