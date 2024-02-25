@@ -8,6 +8,7 @@
 .confirm-email-image-wrapper {
   width: 80%;
   height: auto;
+  max-height: 200px;
 }
 
 .confirm-email-image {
@@ -19,8 +20,8 @@
   width: 80%;
 }
 
-@media (max-width:426px) {
+@media (max-width: 426px) {
   .confirm-email-image-wrapper {
-    height: 200px;
+    max-height: 125px;
   }
 }

@@ -7,7 +7,6 @@
   position: relative;
 }
 
-
 .login-poster {
   width: 385px;
   height: 530px;
@@ -24,7 +23,6 @@
   flex-direction: column;
   max-width: 350px;
   width: 100%;
-
 }
 
 .login-box {
@@ -42,11 +40,9 @@
   margin: 36px 0 12px 0;
 }
 
-
-
-
 .login-form-wrapper {
   padding: 0 40px 20px;
+  text-align: center;
 }
 
 .login-form {
@@ -55,7 +51,6 @@
   align-items: center;
   width: 100%;
   max-width: 350px;
-
 }
 
 .input-label {
@@ -113,39 +108,39 @@
   height: 100%;
 }
 
-.guest-login-info-wrapper {
-  color: gray;
-  padding: 5px 0;
-}
-
-.guest-login-credential {
-  font-size: 12px;
-  margin: 5px;
+.seprator {
+  margin: 20px 0 0 0;
 }
 
 .facebook-login-wrapper {
-  margin: 5px 0 15px 0;
+  margin: 5px 0px;
+  text-align: center;
 }
 
 .facebook-login-btn {
   background: none;
   color: #385185;
   font-size: 16px;
-
+  padding: 0;
+  justify-content: center;
 }
 .facebook-login-btn .facebook-icon {
   width: 20px;
   height: 20px;
-  margin-right: 5px; 
+  margin-right: 5px;
+}
+.alert-message {
+  color: red;
+  font-size: small;
 }
 
 /* responsive for mobile */
-@media (max-width:426px) {
+@media (max-width: 426px) {
   .login-poster {
     display: none;
   }
 
-  .logo-wrapper .photogram-logo{
+  .logo-wrapper .photogram-logo {
     height: 70px;
     width: 200px;
   }
@@ -160,5 +155,4 @@
     padding: 0 20px 20px;
     width: 100%;
   }
-
 }

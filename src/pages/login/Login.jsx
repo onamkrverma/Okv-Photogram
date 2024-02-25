@@ -121,6 +121,24 @@ const Login = () => {
                 </div>
               </form>
               {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+              <div className="seprator">OR</div>
+              <div className="facebook-login-wrapper">
+                <button
+                  type="button"
+                  disabled={true}
+                  className="facebook-login-btn login-button cur-point align-center"
+                >
+                  <span className="facebook-icon">
+                    <FaFacebookSquare
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </span>
+                  Login with facebook
+                </button>
+                <small className="alert-message">
+                  Facebook logins have some issues currently.
+                </small>
+              </div>
             </div>
           ) : (
             // email send confirmation
@@ -132,26 +150,13 @@ const Login = () => {
                   className="confirm-email-image"
                 />
               </div>
-              <div className="confirm-email-message">
+              <p className="confirm-email-message">
                 Your Email not Verified yet, So Please verify email first.
                 Varification link send to your email (check inbox or spam
                 folder).
-              </div>
+              </p>
             </div>
           )}
-          <div className="seprator">OR</div>
-          <div className="facebook-login-wrapper">
-            <button
-              type="button"
-              onClick={handleFacebookLogin}
-              className="facebook-login-btn login-button cur-point align-center"
-            >
-              <span className="facebook-icon">
-                <FaFacebookSquare style={{ width: "100%", height: "100%" }} />
-              </span>
-              Login with facebook
-            </button>
-          </div>
         </div>
         <div className="redirect-box login-box">
           <div className="redirect-text">
@@ -161,20 +166,6 @@ const Login = () => {
                 Sign up
               </Link>
             </p>
-          </div>
-        </div>
-        <div
-          className="guest-login-info-wrapper login-box"
-          style={{ display: "none" }}
-        >
-          <div className="title">Create new account or login as a guest</div>
-          <div className="guest-login-credential">
-            <div className="guest-email">
-              <p>Email: guest@gmail.com</p>
-            </div>
-            <div className="guest-password">
-              <p>Password: guest@1234</p>
-            </div>
           </div>
         </div>
       </div>

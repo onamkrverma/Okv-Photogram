@@ -164,10 +164,10 @@ const Signup = () => {
                   className="confirm-email-image"
                 />
               </div>
-              <div className="confirm-email-message">
+              <p className="confirm-email-message">
                 Verification link send to your email (check inbox or spam
                 folder). Please verify email first.
-              </div>
+              </p>
             </div>
           )}
         </div>
