@@ -42,6 +42,10 @@ const Explore = () => {
     };
   }, [postLimit, postCount, infiniteScroll, setPostLimit]);
 
+  useEffect(() => {
+    document.title = "Explore • Okv Photogram";
+  }, []);
+
   return (
     <div className="explore-page-container">
       <div className="top-photogram-logo">

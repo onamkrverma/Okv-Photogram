@@ -43,6 +43,10 @@ const Home = () => {
     };
   }, [postLimit, postCount, infiniteScroll, setPostLimit]);
 
+  useEffect(() => {
+    document.title = "Home • Okv Photogram";
+  }, []);
+
   return (
     <div className="home-page-container">
       <div className="top-photogram-logo">

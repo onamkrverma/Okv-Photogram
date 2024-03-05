@@ -83,6 +83,10 @@ const Signup = () => {
     }
   };
 
+  useEffect(() => {
+    document.title = "Signup • Okv Photogram";
+  }, []);
+
   return (
     <div className="login-container">
       <div className="login-wrapper">

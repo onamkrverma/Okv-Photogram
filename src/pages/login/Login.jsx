@@ -54,19 +54,9 @@ const Login = () => {
     }
   };
 
-  const handleFacebookLogin = async () => {
-    try {
-      const facebookLoginUser = await facebookLogin();
-      localStorage.setItem("authUser", JSON.stringify(facebookLoginUser.user));
-      window.location.href = "/";
-    } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message.replace("Firebase:", ""));
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
-    }
-  };
+  useEffect(() => {
+    document.title = "Login • Okv Photogram";
+  }, []);
 
   return (
     <div className="login-container">
