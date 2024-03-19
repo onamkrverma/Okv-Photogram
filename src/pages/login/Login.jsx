@@ -1,5 +1,5 @@
 import { sendEmailVerification } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaFacebookSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Signup.css";
 import "../login/Login.css";
 import { Link, useNavigate } from "react-router-dom";
