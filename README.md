@@ -21,7 +21,7 @@
  - Email verification
  - show random users in suggestionlist
  - Add infinite scrolling untill all post load
- 
+ - Reset password if Forgot
  
  #### Upcoming features to be add 
  - display follower and following list
