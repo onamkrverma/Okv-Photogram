@@ -14,6 +14,10 @@ const Signup = lazy(() => import("./pages/signup/Signup"));
 const Home = lazy(() => import("./pages/home/Home"));
 const Explore = lazy(() => import("./pages/explore/Explore"));
 const Profile = lazy(() => import("./pages/profile/Profile"));
+const ForgotPassword = lazy(() =>
+  import("./pages/forgotPassword/ForgotPassword")
+);
+const Verification = lazy(() => import("./pages/verification/Verification"));
 
 function App() {
   const authUser = JSON.parse(localStorage.getItem("authUser"));
@@ -40,6 +44,8 @@ function App() {
               />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/__/auth/action" element={<Verification />} />
 
               {/* private routes */}
               <Route element={<PrivateRoutes />}>

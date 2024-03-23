@@ -120,7 +120,8 @@
 .facebook-login-btn {
   background: none;
   color: #385185;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   padding: 0;
   justify-content: center;
 }
@@ -131,6 +132,18 @@
 }
 .alert-message {
   color: red;
+  font-size: 10px;
+}
+
+.forgot-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+.forgot-wrapper a {
+  color: #385185;
+  text-decoration: none;
   font-size: small;
 }
 

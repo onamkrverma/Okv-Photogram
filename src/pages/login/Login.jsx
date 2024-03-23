@@ -8,6 +8,7 @@ import { auth } from "../../config/FirebaseConfig";
 import firebaseContex from "../../context/FirebaseContex";
 import "./Login.css";
 import "../signup/Signup.css";
+import { RiMailSendFill } from "react-icons/ri";
 
 const Login = () => {
   const { login, facebookLogin } = useContext(firebaseContex);
@@ -84,6 +85,7 @@ const Login = () => {
                     autoComplete="off"
                     name="email"
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="input-label">
@@ -95,7 +97,11 @@ const Login = () => {
                     autoComplete="off"
                     name="password"
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
+                </div>
+                <div className="forgot-wrapper">
+                  <Link to="/forgot-password">Forgot password?</Link>
                 </div>
 
                 <div className="button-wrapper ">
@@ -133,17 +139,11 @@ const Login = () => {
           ) : (
             // email send confirmation
             <div className="signup-confirm-email-wrapper">
-              <div className="confirm-email-image-wrapper">
-                <img
-                  src="/images/confirm-email.svg"
-                  alt="confirm-email"
-                  className="confirm-email-image"
-                />
-              </div>
+              <RiMailSendFill size={100} color="#0095f6" />
+
               <p className="confirm-email-message">
-                Your Email not Verified yet, So Please verify email first.
-                Varification link send to your email (check inbox or spam
-                folder).
+                Your email address has not been verified yet. Please check your
+                inbox or spam folder for the verification link 📧🔍
               </p>
             </div>
           )}

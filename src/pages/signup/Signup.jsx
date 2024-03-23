@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Signup.css";
 import "../login/Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebaseContex from "../../context/FirebaseContex";
 import { db, auth } from "../../config/FirebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
@@ -9,6 +9,7 @@ import usernameChecker from "./UsernameCheker";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import Loading from "../../components/loading/Loading";
 import Footer from "../../components/footer/Footer";
+import { RiMailSendFill } from "react-icons/ri";
 
 const Signup = () => {
   const { signup } = useContext(firebaseContex);
@@ -19,8 +20,6 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isEmailSend, setIsEmailSend] = useState(false);
-
-  const navigate = useNavigate();
 
   const invalid =
     password.length < 6 || email === "" || fullName === "" || username === "";
@@ -38,7 +37,6 @@ const Signup = () => {
 
         await sendEmailVerification(createUser.user);
 
-        setLoading(false);
         setIsEmailSend(true);
 
         // wait until email verify
@@ -60,19 +58,18 @@ const Signup = () => {
               authProvider: "Email and password",
               dateCreated: new Date(),
             });
-            window.location.href = "/";
+            window.location.href = "/login";
             setIsEmailSend(false);
           }
           await auth.currentUser.reload();
         }, 2000);
       } catch (error) {
-        console.log(error);
-        e.target.reset();
-        setLoading(false);
         setErrorMessage(error.message.replace("Firebase:", ""));
         setTimeout(() => {
           setErrorMessage("");
         }, 5000);
+      } finally {
+        setLoading(false);
       }
     } else {
       setErrorMessage("Username already taken");
@@ -106,6 +103,7 @@ const Signup = () => {
                     aria-required="true"
                     autoComplete="off"
                     name="email"
+                    required
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -117,6 +115,7 @@ const Signup = () => {
                     aria-required="true"
                     autoComplete="off"
                     name="fullName"
+                    required
                     onChange={(e) => setFullName(e.target.value)}
                   />
                 </div>
@@ -128,6 +127,7 @@ const Signup = () => {
                     aria-required="true"
                     autoComplete="off"
                     name="username"
+                    required
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyDown={(e) => e.code === "Space" && e.preventDefault()}
                   />
@@ -140,6 +140,8 @@ const Signup = () => {
                     aria-required="true"
                     autoComplete="off"
                     name="password"
+                    required
+                    minLength={8}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -161,16 +163,10 @@ const Signup = () => {
           ) : (
             // email send confirmation
             <div className="signup-confirm-email-wrapper">
-              <div className="confirm-email-image-wrapper">
-                <img
-                  src="/images/confirm-email.svg"
-                  alt="confirm-email"
-                  className="confirm-email-image"
-                />
-              </div>
+              <RiMailSendFill size={100} color="#0095f6" />
               <p className="confirm-email-message">
-                Verification link send to your email (check inbox or spam
-                folder). Please verify email first.
+                Please check your inbox or spam folder for the verification
+                link. You need to verify your email first 📧🔍
               </p>
             </div>
           )}
