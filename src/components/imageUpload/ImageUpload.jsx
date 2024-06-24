@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./ImageUpload.css";
 import { storage, db, auth } from "../../config/FirebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -7,23 +7,30 @@ import Loading from "../loading/Loading";
 import { RxCross2 } from "react-icons/rx";
 import firebaseContex from "../../context/FirebaseContex";
 import { encode } from "../../utils/imageOptimizer";
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 const ImageUpload = () => {
   const { isUpload, setIsUpload } = useContext(firebaseContex);
 
-  const [image, setImage] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
   const [caption, setCaption] = useState("");
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const imageRef = useRef();
+  const imageRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [selectedFileUrl, setSelectedFileUrl] = useState("");
+
+  useEffect(() => {
+    // disable body scroll
+    document.body.style.overflow = isUpload ? "hidden" : "auto";
+  }, [isUpload]);
 
   const handleUpload = async () => {
     setMessage("");
-    if (image) {
+    if (selectedFile) {
       setLoading(true);
-      const imageName = image.name.split(".")[0].replaceAll(" ", "-");
-      const encodedWebpImage = await encode(image);
+      const imageName = selectedFile.name.split(".")[0].replaceAll(" ", "-");
+      const encodedWebpImage = await encode(selectedFile);
       const storageRef = ref(storage, `/images/${imageName}.webp`);
       const uploadTask = uploadBytesResumable(storageRef, encodedWebpImage, {
         contentType: "image/webp",
@@ -62,7 +69,8 @@ const ImageUpload = () => {
 
           setCaption("");
           imageRef.current.value = null;
-          setImage("");
+          setSelectedFile("");
+          setSelectedFileUrl("");
           setProgress(0);
           setLoading(false);
           setMessage("Image uploaded successfully ✅");
@@ -72,14 +80,28 @@ const ImageUpload = () => {
   };
 
   const handleClose = () => {
-    setCaption("");
-    setImage("");
-    imageRef.current.value = "";
-    setProgress(0);
-    setMessage("");
-    setIsUpload(false);
-    setLoading(false);
+    if (imageRef.current) {
+      setCaption("");
+      setSelectedFile("");
+      imageRef.current.value = "";
+      setProgress(0);
+      setMessage("");
+      setIsUpload(false);
+      setLoading(false);
+      setSelectedFileUrl("");
+    }
   };
+
+  useEffect(() => {
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+
+    reader.onload = () => {
+      const imageUrl = reader.result;
+      setSelectedFileUrl(imageUrl);
+    };
+  }, [selectedFile]);
 
   return (
     <div
@@ -88,44 +110,68 @@ const ImageUpload = () => {
     >
       <div className="image-upload-container absolute-center">
         <div className="image-upload-wrapper">
-          <textarea
-            type="text"
-            placeholder="Enter captions (optional)"
-            className="caption-textarea"
-            onChange={(e) => setCaption(e.target.value)}
-            value={caption}
-          />
-          <input
-            type="file"
-            title="select image"
-            placeholder="select image"
-            onChange={(e) => setImage(e.target.files[0])}
-            accept="image/jpeg, image/png, image/webp"
-            className="image-select-input"
-            ref={imageRef}
-          />
-
-          <div className="button-wrapper">
-            <button
-              type="button"
-              title="upload"
-              onClick={handleUpload}
-              disabled={!image}
-              className="upload-btn  cur-point"
-              style={{ opacity: (!image || loading) && "0.5" }}
-            >
-              Upload
-            </button>
-            {loading && <Loading />}
+          <div className="image-upload absolute-center">
+            {selectedFileUrl.length > 0 ? (
+              <img src={selectedFileUrl} alt="selected-file" />
+            ) : (
+              <>
+                <IoCloudUploadOutline size={50} />
+                <small> supports: jpeg, png, webp</small>
+                <label htmlFor="image" className="browse-btn">
+                  Browse
+                </label>
+              </>
+            )}
+            <input
+              id="image"
+              type="file"
+              title="select image"
+              placeholder="select image"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+              accept="image/jpeg, image/png, image/webp"
+              className="image-select-input"
+              ref={imageRef}
+              hidden
+            />
           </div>
-
-          {progress > 0 && <p>Upload {progress}% completed</p>}
-          {message && (
-            <div>
-              <p>{message}</p>
+          <div className="image-caption-wrapper">
+            <div className="user-profile align-center ">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="user-profile"
+              />
+              <p className="">{auth.currentUser?.displayName}</p>
             </div>
-          )}
+
+            <textarea
+              type="text"
+              placeholder="Enter captions (optional)"
+              className="caption-textarea"
+              onChange={(e) => setCaption(e.target.value)}
+              value={caption}
+            />
+          </div>
         </div>
+        <div className="button-wrapper absolute-center">
+          <button
+            type="button"
+            title="upload"
+            onClick={handleUpload}
+            disabled={!selectedFile}
+            className="upload-btn  cur-point"
+            style={{ opacity: (!selectedFile || loading) && "0.5" }}
+          >
+            Upload
+          </button>
+          {loading && <Loading />}
+        </div>
+
+        {progress > 0 && <p>Upload {progress}% completed</p>}
+        {message && (
+          <div>
+            <p>{message}</p>
+          </div>
+        )}
       </div>
       <button
         type="button"
