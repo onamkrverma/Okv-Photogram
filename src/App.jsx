@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import FirebaseState from "./context/FirebaseState";
 import LoadPhotogram from "./components/loading/LoadPhotogram";
+import PageNotFound from "./pages/pageNotFound/PageNotFound";
 
 const Login = lazy(() => import("./pages/login/Login"));
 const Signup = lazy(() => import("./pages/signup/Signup"));
@@ -46,6 +47,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/__/auth/action" element={<Verification />} />
+              <Route path="*" element={<PageNotFound />} />
 
               {/* private routes */}
               <Route element={<PrivateRoutes />}>

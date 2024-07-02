@@ -1,0 +1,25 @@
+.page-not-found-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  color: var(--primary-text);
+}
+.page-not-found-wrapper-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.page-not-found-wrapper-text-wrapper h1 {
+  font-size: 50px;
+  font-weight: bold;
+}
+.page-not-found-wrapper-text-wrapper a {
+  text-decoration: none;
+  background: var(--primary-btn-bg);
+  color: var(--secondary-bg);
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+}
