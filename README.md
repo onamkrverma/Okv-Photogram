@@ -1,62 +1,52 @@
 # Okv Photogram
- - Okv photogram is a web app that mimics Instagram's features using React.js and Firebase v9 (Baas). It lets user share their photos, comment and like others' posts. User can also browse and follow other users' profiles.
- 
- ## Screenshots
+
+## Introduction
+Okv Photogram is an advanced web application that emulates the core functionalities of Instagram. Developed using React.js and Firebase v9 (BaaS), it offers users a platform to share their moments, engage with others’ content through likes and comments, and explore profiles within the community.
+
+### Screenshots
 
    ![Okv-photogram](https://user-images.githubusercontent.com/106578262/220271137-cf9653ab-0b31-43e3-8b75-47d4227258db.png)
+
+
+### Features
+- Secure authentication via email-password and Facebook login
+- Email verification for account security
+- User-friendly interface for posting images with captions
+- Interactive features to like, comment, and share posts
+- Multi-page layout including home and explore pages
+- Responsive design for optimal user experience across devices
+- Capability to follow and unfollow users
+- Personalized user profile pages
+- User search functionality by username
+- Suggestions list showcasing random users
+- Infinite scrolling for seamless content discovery
+- Password reset functionality for account recovery
+
+### Upcoming Enhancements
+Display of followers and following lists
+Additional features to enhance user interaction
+
+## Migration Note
+The project has transitioned from Create React App (CRA) to a Vite + React application for improved performance and development experience.
+
+### Technology Stack
+- React.js
+- CSS3
+- Firebase v9
+- React Router DOM
+- React Loading Skeleton
+- React Icons
+
+### Getting Started
+To set up the project locally, ensure you have Node.js and Git installed on your machine. Follow these steps:
+
+1. Clone the repository.
+2. Install dependencies with npm install.
+3. Start the development server with npm run dev.
+4. Access the application at http://localhost:5173.
+
+## Feedback and Contributions
+We welcome your feedback and contributions to the project. Please feel free to star :star: the repository and [create an issue](https://github.com/onamkrverma/Okv-Photogram/issues) for any queries or suggestions.
+
  
 
-
-## Features of this clone 
- - Login and signup with email-password authentication
- - Post a image with caption
- - Like/dislike, comments and share any post
- - Multipage layout (home and explore page)
- - Fully responsive
- - Follow and Unfollow 
- - User profile page 
- - Facebook login 
- - Search users by username
- - Click on username to view that profile
- - Email verification
- - show random users in suggestionlist
- - Add infinite scrolling untill all post load
- - Reset password if Forgot
- 
- #### Upcoming features to be add 
- - display follower and following list
- - many more..
-
-## Note: 
-- Now this project is migrated from CRA to Vite + React app
-
- 
-## Technology used 
- - React js
- - CSS3
- - Firebase v9
- - React router dom
- - React loading skeleton
- - React icons
- 
-## Feedbacks
-### Don't forget to :star: the repo
-
-
- 
-
-## Getting Started with Vite React App
- - This project is bootstrapped with [Create Vite + React App](https://github.com/vitejs/vite/tree/main/packages/create-vite).
- - clone down this repositery. You will need to `node.js` and `git` installed globally on your machine.
-
-
-## installation and setup instructions
-1. installation: `npm install`
-2. In the project directory, you can run: `npm run dev`
-
-Runs the app in the development mode.\
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-The page will reload when you make changes.
-
-## Queries
-If you have any query or suggestion, feel free to [create an issue](https://github.com/onamkrverma/Okv-Photogram/issues)
